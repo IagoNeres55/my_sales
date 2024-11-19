@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsc && nodemon dist/index.js",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/http/server.ts",
     "build": "tsc"
   },
   "keywords": [],
@@ -20,6 +20,7 @@
     "eslint": "^9.13.0",
     "eslint-config-prettier": "^9.1.0",
     "prettier": "^3.3.3",
+    "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.6.3"
   },
@@ -27,6 +28,9 @@
     "cors": "^2.8.5",
     "express": "^4.21.1",
     "express-async-errors": "^3.1.1",
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "pg": "^8.13.1",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.20"
   }
 }
