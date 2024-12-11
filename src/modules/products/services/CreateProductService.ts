@@ -9,13 +9,15 @@ interface IcreateProduct {
 }
 
 export default class CreateProductService {
-  async excute({ name, price, quantity }: IcreateProduct): Promise<Product> {
+  async execute({ name, price, quantity }: IcreateProduct): Promise<Product> {
+
     // Verifica se já existe um produto com o mesmo nome no banco de dados.
     const productExists = await productsRepositories.findByName(name)
 
     if (productExists) {
-      throw new AppError('Existe Produtos já cadastrados com esse nome', 409)
+      throw new AppError('Existe Produtos cadastrado com esse nome', 409)
     }
+
     // Cria uma nova instância de produto com os dados fornecidos.
     const product = productsRepositories.create({
       name,
