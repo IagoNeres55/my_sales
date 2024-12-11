@@ -31,10 +31,11 @@ export default class UpdateProductService {
     }
 
     // pega o product encontrado e altera com os novos valores
-    product.name = name;
-    product.price = price;
-    product.quantity = quantity;
+    product.name = name
+    product.price = price
+    product.quantity = quantity
 
+    //salva no banco as informações
     await productsRepositories.save(product)
 
     return product
