@@ -5,21 +5,22 @@ import CreateProductService from '../services/CreateProductService'
 import DeleteProductService from '../services/DeleteProductService'
 import UpdateProductService from '../services/UpdateProductService'
 
+
 export default class ProductsControllers {
-  public async index(_: Request, response: Response): Promise<Response> {
+  public async index(_: Request, response: Response): Promise<void> {
     const listProductsService = new ListProdutcService()
     const products = await listProductsService.execute()
-    return response.json(products)
+    response.json(products)
   }
 
-  public async show(request: Request, response: Response): Promise<Response> {
+  public async show(request: Request, response: Response): Promise<void> {
     const { id } = request.params
     const showProductsService = new ShowProductService()
     const products = await showProductsService.execute({ id })
-    return response.json(products)
+    response.json(products)
   }
 
-  public async create(request: Request, response: Response): Promise<Response> {
+  public async create(request: Request, response: Response): Promise<void> {
     const { name, price, quantity } = request.body
 
     const createProductService = new CreateProductService()
@@ -28,10 +29,10 @@ export default class ProductsControllers {
       price,
       quantity,
     })
-    return response.json(product)
+    response.json(product)
   }
 
-  public async update(request: Request, response: Response): Promise<Response> {
+  public async update(request: Request, response: Response): Promise<void> {
     const { id } = request.params
     const { name, price, quantity } = request.body
     const updateProductService = new UpdateProductService()
@@ -41,14 +42,14 @@ export default class ProductsControllers {
       price,
       quantity,
     })
-    return response.json(product)
+    response.json(product)
   }
 
-  public async delete(request: Request, response: Response): Promise<Response> {
+  public async delete(request: Request, response: Response): Promise<void> {
     const { id } = request.params
     const deleteProductService = new DeleteProductService()
     await deleteProductService.execute({ id })
 
-    return response.status(204).send({})
+    response.status(204).send({})
   }
 }

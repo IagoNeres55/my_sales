@@ -2,7 +2,7 @@ import productsRouter from '@modules/products/routes/ProductsRouts'
 import { Router } from 'express'
 // import express from 'express';
 const routes = Router()
-const port = 3000
+// const port = 3000
 // const app = express();
 
 // app.use(express.json());

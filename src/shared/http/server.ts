@@ -6,14 +6,15 @@ import routes from './routes'
 import ErrorHandleMiddleware from '../middlewares/ErrorHandleMiddleware'
 import { AppDataSource } from '@shared/typeorm/data-source'
 
+
 AppDataSource.initialize()
   .then(async () => {
     const app = express()
 
     app.use(cors())
     app.use(express.json())
-    app.use(ErrorHandleMiddleware.handleError as any)
     app.use(routes)
+    app.use(ErrorHandleMiddleware.handleError)
 
     console.log('connection to the database 🎉🎉')
 
