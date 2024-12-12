@@ -5,7 +5,7 @@ import cors from 'cors'
 import routes from './routes'
 import ErrorHandleMiddleware from '../middlewares/ErrorHandleMiddleware'
 import { AppDataSource } from '@shared/typeorm/data-source'
-
+import { errors } from 'celebrate'
 
 AppDataSource.initialize()
   .then(async () => {
@@ -14,6 +14,10 @@ AppDataSource.initialize()
     app.use(cors())
     app.use(express.json())
     app.use(routes)
+
+    // errors do celebrate - intercepta os erros caso seja de schema
+    app.use(errors())
+
     app.use(ErrorHandleMiddleware.handleError)
 
     console.log('connection to the database 🎉🎉')
