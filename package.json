@@ -8,7 +8,6 @@
     "build": "tsc",
     "migration:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./src/shared/typeorm/data-source.ts",
     "migration:create": "cross-env ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:create src/shared/typeorm/migrations/%npm_config_name%"
-
   },
   "keywords": [],
   "author": "",
@@ -30,6 +29,8 @@
     "typescript": "^5.6.3"
   },
   "dependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "bcrypt": "^5.1.1",
     "celebrate": "^15.0.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
