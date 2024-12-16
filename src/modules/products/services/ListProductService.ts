@@ -1,5 +1,5 @@
 import { Product } from '../database/entities/Product'
-import { productsRepositories } from '../database/entities/repositories/ProductsRepositories'
+import { productsRepositories } from '../database/repositories/ProductsRepositories'
 
 export default class ListProdutcService {
   async execute(): Promise<Product[]> {

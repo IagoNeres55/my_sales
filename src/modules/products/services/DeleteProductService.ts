@@ -1,5 +1,5 @@
 import AppError from '@shared/erros/AppError'
-import { productsRepositories } from '../database/entities/repositories/ProductsRepositories'
+import { productsRepositories } from '../database/repositories/ProductsRepositories'
 
 export default class DeleteProductService {
   async execute({ id }: { id: string }): Promise<void> {
