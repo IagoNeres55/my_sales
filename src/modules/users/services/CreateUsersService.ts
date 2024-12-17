@@ -9,8 +9,15 @@ interface ICreateUser {
   password: string
 }
 
+interface IUser {
+  id: number
+  name: string
+  email: string
+  created_at: Date
+}
+
 export default class CreateUserService {
-  async execute({ name, email, password }: ICreateUser): Promise<User> {
+  async execute({ name, email, password }: ICreateUser): Promise<IUser> {
     const emailExists = await usersRepositories.findByEmail(email)
 
     if (emailExists) {
@@ -27,6 +34,11 @@ export default class CreateUserService {
 
     await usersRepositories.save(user)
 
-    return user
+    return {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      created_at: user.created_at,
+    }
   }
 }
