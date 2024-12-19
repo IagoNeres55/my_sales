@@ -16,7 +16,7 @@ const JWT_SECRET = process.env.SECRET_KEY_JWT as Secret
 export default class AuthMiddleware {
   public static execute(
     request: Request,
-    response: Response,
+    _response: Response,
     next: NextFunction,
   ): void {
     const tokenHeaders = request.headers.authorization
