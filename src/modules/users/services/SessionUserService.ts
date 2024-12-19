@@ -1,4 +1,4 @@
-import jwt, { sign } from 'jsonwebtoken'
+import { Secret, sign } from 'jsonwebtoken'
 import 'dotenv/config'
 import { usersRepositories } from '../database/repositories/UserRepositories'
 import AppError from '@shared/erros/AppError'
@@ -15,7 +15,7 @@ interface ISessionUser {
   password: string
 }
 
-const JWT_SECRET = process.env.SECRET_KEY_JWT as string
+const JWT_SECRET = process.env.SECRET_KEY_JWT as Secret
 
 export default class SessionUserService {
   async execute({ email, password }: ISessionUser): Promise<ISessionResponse> {
