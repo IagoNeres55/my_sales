@@ -18,7 +18,6 @@ export default class UpdateUserAvatarService {
       throw new AppError('user not found', 404)
     }
 
-
     // validar se já existe e apagar
     if (user.avatar) {
       const userAvatarFilePath = path.join(uploadConfig.directory, user.avatar)
@@ -34,5 +33,6 @@ export default class UpdateUserAvatarService {
     user.avatar = avatarFileName
 
     await usersRepositories.save(user)
+    return user
   }
 }
