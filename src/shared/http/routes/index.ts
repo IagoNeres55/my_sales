@@ -1,4 +1,5 @@
 import productsRouter from '@modules/products/routes/ProductsRouts'
+import sessionsRouter from '@modules/users/routes/SessionRoutes'
 import usersRouter from '@modules/users/routes/UserRoutes'
 import { Router } from 'express'
 // import express from 'express';
@@ -9,6 +10,7 @@ const routes = Router()
 // app.use(express.json());
 routes.use('/products', productsRouter)
 routes.use('/users', usersRouter)
+routes.use('/sessions', sessionsRouter)
 
 
 routes.get('/health', (req, res) => {

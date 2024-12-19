@@ -10,4 +10,5 @@ usersRouter.get('/', usersController.index)
 usersRouter.post('/', createUserSchema, usersController.create)
 
 
+
 export default usersRouter

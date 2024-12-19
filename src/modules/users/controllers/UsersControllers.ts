@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import ListUsersService from '../services/ListUsersService'
 import CreateUserService from '../services/CreateUsersService'
-import { User } from '../database/entities/User'
+import SessionUserService from '../services/SessionUserService'
 
 export default class UsersControlleres {
   public async index(_: Request, response: Response): Promise<void> {
@@ -22,5 +22,17 @@ export default class UsersControlleres {
     })
 
     response.json(user)
+  }
+
+  public async login(request: Request, response: Response): Promise<void> {
+    const { email, password } = request.body
+    const sessionUserService = new SessionUserService()
+    const userAuth = await sessionUserService.execute({email, password})
+
+    response.json({
+      message: 'Sucesso',
+      token_type: 'Bearer',
+      access_token: userAuth,
+    })
   }
 }
