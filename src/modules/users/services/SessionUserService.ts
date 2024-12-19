@@ -33,7 +33,6 @@ export default class SessionUserService {
       throw new AppError('E-mail ou senha incorreto', 400)
     }
 
-    const userRemove = removeFields(user, ['password', 'created_at', 'updated_at'])
 
 
 
@@ -42,7 +41,7 @@ export default class SessionUserService {
       expiresIn: '24h',
     })
     return {
-      user: userRemove as User,
+      user: removeFields(user, ['password', 'created_at', 'updated_at']) as User,
       token_type: 'Bearer',
       access_token: token,
     }

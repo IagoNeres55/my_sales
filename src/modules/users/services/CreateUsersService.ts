@@ -2,6 +2,7 @@ import AppError from '@shared/erros/AppError'
 import { usersRepositories } from '../database/repositories/UserRepositories'
 import { User } from '../database/entities/User'
 import { hash } from 'bcrypt'
+import { removeFields } from '@shared/utils/removeFields'
 
 interface ICreateUser {
   name: string
@@ -9,15 +10,8 @@ interface ICreateUser {
   password: string
 }
 
-interface IUser {
-  id: number
-  name: string
-  email: string
-  created_at: Date
-}
-
 export default class CreateUserService {
-  async execute({ name, email, password }: ICreateUser): Promise<IUser> {
+  async execute({ name, email, password }: ICreateUser): Promise<User> {
     const emailExists = await usersRepositories.findByEmail(email)
 
     if (emailExists) {
@@ -34,11 +28,6 @@ export default class CreateUserService {
 
     await usersRepositories.save(user)
 
-    return {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      created_at: user.created_at,
-    }
+    return removeFields(user, ['password', 'updated_at']) as User
   }
 }

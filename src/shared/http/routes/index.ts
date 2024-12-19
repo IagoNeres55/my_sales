@@ -1,4 +1,5 @@
 import productsRouter from '@modules/products/routes/ProductsRouts'
+import avatarRouter from '@modules/users/routes/AvatarRoutes'
 import sessionsRouter from '@modules/users/routes/SessionRoutes'
 import usersRouter from '@modules/users/routes/UserRoutes'
 import { Router } from 'express'
@@ -11,7 +12,7 @@ const routes = Router()
 routes.use('/products', productsRouter)
 routes.use('/users', usersRouter)
 routes.use('/sessions', sessionsRouter)
-
+routes.use('/avatar', avatarRouter)
 
 routes.get('/health', (req, res) => {
   res.json({ message: 'Hellow Dev!' })

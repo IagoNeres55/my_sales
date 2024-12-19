@@ -4,6 +4,7 @@ import { usersRepositories } from '../database/repositories/UserRepositories'
 import path from 'path'
 import uploadConfig from '@config/upload'
 import fs from 'fs'
+import { removeFields } from '@shared/utils/removeFields'
 
 interface IUpdateUserAvatar {
   userId: string
@@ -33,6 +34,6 @@ export default class UpdateUserAvatarService {
     user.avatar = avatarFileName
 
     await usersRepositories.save(user)
-    return user
+    return removeFields(user, ['password', 'created_at']) as User
   }
 }
