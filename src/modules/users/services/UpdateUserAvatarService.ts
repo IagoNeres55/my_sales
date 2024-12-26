@@ -4,7 +4,7 @@ import { usersRepositories } from '../database/repositories/UserRepositories'
 import path from 'path'
 import uploadConfig from '@config/upload'
 import fs from 'fs'
-import { removeFields } from '@shared/utils/removeFields'
+import { removeFields } from 'src/utils/removeFields'
 
 interface IUpdateUserAvatar {
   userId: string

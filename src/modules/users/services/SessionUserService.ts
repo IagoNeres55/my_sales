@@ -4,7 +4,7 @@ import { usersRepositories } from '../database/repositories/UserRepositories'
 import AppError from '@shared/erros/AppError'
 import bcrypt from 'bcrypt'
 import { User } from '../database/entities/User'
-import { removeFields } from '@shared/utils/removeFields'
+import { removeFields } from 'src/utils/removeFields'
 
 interface ISessionResponse {
   user: User

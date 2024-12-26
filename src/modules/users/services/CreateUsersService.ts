@@ -2,7 +2,7 @@ import AppError from '@shared/erros/AppError'
 import { usersRepositories } from '../database/repositories/UserRepositories'
 import { User } from '../database/entities/User'
 import { hash } from 'bcrypt'
-import { removeFields } from '@shared/utils/removeFields'
+import { removeFields } from 'src/utils/removeFields'
 
 interface ICreateUser {
   name: string
