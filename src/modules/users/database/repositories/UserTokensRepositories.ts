@@ -10,14 +10,12 @@ export const UserTokensRepositories = AppDataSource.getRepository(
     return userToken
   },
 
-
   // é criado um token a partir do user_id informado "obs: o token é gerado de forma automatica pelo banco no formato uuid"
   async generate(user_id: number): Promise<UserToken | undefined> {
     const userToken = this.create({
       user_id,
     })
 
-    await this.save(userToken)
-    return userToken
+    return await this.save(userToken)
   },
 })

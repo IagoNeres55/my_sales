@@ -2,6 +2,8 @@ import { MigrationInterface, QueryRunner, Table } from 'typeorm'
 
 export class CreateUserToken1734989889396 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`)
+
     await queryRunner.createTable(
       new Table({
         name: 'user_tokens',
@@ -10,6 +12,7 @@ export class CreateUserToken1734989889396 implements MigrationInterface {
             name: 'id',
             type: 'integer',
             isPrimary: true,
+            isGenerated:true,
             generationStrategy: 'increment',
           },
           {
