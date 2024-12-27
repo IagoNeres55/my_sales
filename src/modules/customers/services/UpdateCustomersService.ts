@@ -15,20 +15,25 @@ export class UpdateCustomersService {
     name,
     email,
   }: IUpdateCustomers): Promise<Customers> {
+
     const customer = await customersRepositories.findById(id)
 
     if (!customer) {
-      throw new AppError('Customers não encontrado', 404)
+      throw new AppError('Cliente não encontrado', 404)
     }
 
-    const customerEmailExists = await customersRepositories.findByEmail(email)
+    // Verifica se o email já está em uso por outro cliente
+    if (email && email !== customer.email) {
+      const customerEmailExists = await customersRepositories.findByEmail(email)
 
-    if (customerEmailExists && email !== customer.email) {
-      throw new AppError('Já existe usuários utilizando esse email', 409)
+      if (customerEmailExists) {
+        throw new AppError('Já existe um cliente utilizando este email', 409)
+      }
+
+      customer.email = email
     }
 
-    customer.email = email
-
+    // Atualiza o nome caso tenha sido informado
     if (name) {
       customer.name = name
     }
