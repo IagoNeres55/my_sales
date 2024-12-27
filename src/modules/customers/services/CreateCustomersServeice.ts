@@ -11,6 +11,7 @@ export default class CreateCustomersService {
   public async execute({ name, email }: ICreateCustomers): Promise<Customers> {
     const emailExists = await customersRepositories.findByEmail(email)
 
+
     if (emailExists) {
       throw new AppError('Email já esta sendo utilizado', 409)
     }

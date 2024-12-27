@@ -3,7 +3,9 @@ import { customersRepositories } from '../database/repositories/CustomersReposit
 
 export class ListCustomersService {
   public async execute(): Promise<Customers[]> {
-    const customers = customersRepositories.find()
+    const customers = await customersRepositories.find()
+    console.log(customers)
+
     return customers
   }
 }

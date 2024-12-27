@@ -1,6 +1,6 @@
 import { AppDataSource } from '@shared/typeorm/data-source'
 import { Customers } from '../entities/Customers'
-import { Like } from 'typeorm'
+// import { Like } from 'typeorm'
 
 export const customersRepositories = AppDataSource.getRepository(
   Customers,
@@ -16,23 +16,21 @@ export const customersRepositories = AppDataSource.getRepository(
   async findByEmail(email: string): Promise<Customers | null> {
     return this.findOneBy({ email })
   },
-
-
-  // caso precise buscar varios dadoss
-
-  // async findAllByName(name: string): Promise<Customers[]> {
-  //   return this.find({
-  //     where: {
-  //       name: Like(`%${name}%`),
-  //     },
-  //   })
-  // },
-
-  // async findAllByEmail(email: string): Promise<Customers[]> {
-  //   return this.find({
-  //     where: {
-  //       email: Like(`%${email}%`),
-  //     },
-  //   })
-  // },
 })
+// caso precise buscar varios dadoss
+
+// async findAllByName(name: string): Promise<Customers[]> {
+//   return this.find({
+//     where: {
+//       name: Like(`%${name}%`),
+//     },
+//   })
+// },
+
+// async findAllByEmail(email: string): Promise<Customers[]> {
+//   return this.find({
+//     where: {
+//       email: Like(`%${email}%`),
+//     },
+//   })
+// },

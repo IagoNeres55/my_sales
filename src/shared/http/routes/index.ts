@@ -1,4 +1,5 @@
 import uploadConfig from '@config/upload'
+import customerRouter from '@modules/customers/routes/CustomersRoutes'
 import productsRouter from '@modules/products/routes/ProductsRouts'
 import avatarRouter from '@modules/users/routes/AvatarRoutes'
 import passwordRouter from '@modules/users/routes/PasswordRoutes'
@@ -22,6 +23,8 @@ routes.use('/avatar', avatarRouter)
 routes.use('/files', express.static(uploadConfig.directory))
 routes.use('/passwords', passwordRouter)
 routes.use('/profiles', profileRouter)
+routes.use('/customers', customerRouter)
+
 
 routes.get('/health', (req, res) => {
   res.json({ message: 'Hellow Dev!' })
