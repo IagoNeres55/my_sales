@@ -1,6 +1,7 @@
 import AppError from '@shared/erros/AppError'
 import { Customers } from '../database/entities/Customers'
 import { customersRepositories } from '../database/repositories/CustomersRepositories'
+import e from 'express'
 
 interface IUpdateCustomers {
   id: number
@@ -20,15 +21,13 @@ export class UpdateCustomersService {
       throw new AppError('Customers não encontrado', 404)
     }
 
-    if (email) {
-      const customerUpdateEmail = await customersRepositories.findByEmail(email)
+    const customerEmailExists = await customersRepositories.findByEmail(email)
 
-      if (customerUpdateEmail) {
-        throw new AppError('Email já esta sendo utilizado', 409)
-      }
-
-      customer.email = email
+    if (customerEmailExists && email !== customer.email) {
+      throw new AppError('Já existe usuários utilizando esse email', 409)
     }
+
+    customer.email = email
 
     if (name) {
       customer.name = name
