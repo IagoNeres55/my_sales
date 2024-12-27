@@ -15,4 +15,3 @@ export const productsRepositories = AppDataSource.getRepository(Product).extend(
   },
 )
 
-productsRepositories
