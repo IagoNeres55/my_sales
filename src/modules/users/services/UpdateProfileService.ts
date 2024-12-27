@@ -11,7 +11,7 @@ interface IUpdateProfile {
   old_password?: string
 }
 
-export default class UodateProfileService {
+export default class UpdateProfileService {
   async execute({
     user_id,
     name,
