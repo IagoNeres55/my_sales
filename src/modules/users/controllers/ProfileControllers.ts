@@ -19,7 +19,7 @@ export default class ProfileControllers {
 
     const updateProfile = new UpdateProfileService()
 
-    const user = updateProfile.execute({
+    const user = await updateProfile.execute({
       user_id,
       name,
       email,
