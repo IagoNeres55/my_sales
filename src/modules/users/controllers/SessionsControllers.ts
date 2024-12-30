@@ -1,4 +1,4 @@
-import { Request, Response} from 'express'
+import { Request, Response } from 'express'
 import SessionUserService from '../services/SessionUserService'
 
 export default class SessionsControllers {
@@ -9,8 +9,7 @@ export default class SessionsControllers {
 
     const userToken = await createSession.execute({ email, password })
 
-     response.json(userToken)
+    response.json(userToken)
     return
-
   }
 }
