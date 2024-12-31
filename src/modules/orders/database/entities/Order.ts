@@ -3,10 +3,14 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
+  OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
+import { OrdersProducts } from './OrdersProducts'
 
 @Entity('orders')
 export class Order {
@@ -22,4 +26,11 @@ export class Order {
 
   @UpdateDateColumn()
   updated_at: Date
+
+  @OneToMany(() => OrdersProducts, order_products => order_products.order, {
+    cascade: true,
+  })
+  order_products: OrdersProducts[]
+
+
 }

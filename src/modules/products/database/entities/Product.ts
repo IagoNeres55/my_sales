@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import { OrdersProducts } from '@modules/orders/database/entities/OrdersProducts'
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 
 @Entity('products')
 export class Product {
@@ -19,4 +20,9 @@ export class Product {
 
   @UpdateDateColumn({ type: 'timestamp'})
   updated_at: Date
+
+  @OneToMany(()=> OrdersProducts, order_products => order_products.product, {
+    cascade: true
+  })
+  order_products: OrdersProducts[]
 }
