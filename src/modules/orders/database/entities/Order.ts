@@ -31,6 +31,4 @@ export class Order {
     cascade: true,
   })
   order_products: OrdersProducts[]
-
-
 }
