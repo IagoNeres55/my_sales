@@ -1,5 +1,6 @@
 import uploadConfig from '@config/upload'
 import customerRouter from '@modules/customers/routes/CustomersRoutes'
+import orderRouter from '@modules/orders/routes/OrdersRoutes'
 import productsRouter from '@modules/products/routes/ProductsRouts'
 import avatarRouter from '@modules/users/routes/AvatarRoutes'
 import passwordRouter from '@modules/users/routes/PasswordRoutes'
@@ -21,9 +22,11 @@ routes.use('/avatar', avatarRouter)
 // ao acessar a rota statica ele mostra a foto
 // ex: http://localhost:3333/files/8fa4305b1178a84c4b17-257610.jpg
 routes.use('/files', express.static(uploadConfig.directory))
+
 routes.use('/passwords', passwordRouter)
 routes.use('/profiles', profileRouter)
 routes.use('/customers', customerRouter)
+routes.use('/orders', orderRouter)
 
 
 routes.get('/health', (req, res) => {

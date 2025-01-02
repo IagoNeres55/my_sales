@@ -3,6 +3,7 @@ import { Order } from '../database/entities/Order'
 import { customersRepositories } from '@modules/customers/database/repositories/CustomersRepositories'
 import AppError from '@shared/erros/AppError'
 import { productsRepositories } from '@modules/products/database/repositories/ProductsRepositories'
+import { orderRepositories } from '../database/repositories/OrderRepositories'
 
 interface ICreateOrder {
   customer_id: string
@@ -16,7 +17,7 @@ export default class CreateOrderService {
     )
 
     if (!customerExists) {
-      throw new AppError('Não existe customer com o id informado')
+      throw new AppError('Não existe clientes com o id informado')
     }
 
     const existsProducts = await productsRepositories.findAllByIds(products)
@@ -41,18 +42,45 @@ export default class CreateOrderService {
 
     // validar se existe a quantidade em estoque, caso não existir retornar um erro
     const quantityAvalible = products.filter(product => {
-      existsProducts.filter(
+      // Encontra o produto correspondente no estoque
+      const estoqueExists = existsProducts.find(
         productExisten => productExisten.id === product.id,
-      )[0].quantity < product.quantity
+      )
+
+      // Verifica se o estoque é insuficiente
+      return estoqueExists && estoqueExists.quantity < product.quantity
     })
 
-    if (quantityAvalible.length) {
-      throw new AppError(
-        `the quantity ${quantityAvalible[0].quantity} id not avaliable for ${quantityAvalible[0].id}`,
-        409,
-      )
+    console.log(quantityAvalible)
+
+    if (quantityAvalible.length > 0) {
+      throw new AppError(`Produto não tem estoque suficiente`, 409)
     }
 
+    // Pegando somente os dados que devem ser inseridos
+    const serializadProducts = products.map(product => ({
+      product_id: product.id,
+      quantity: product.quantity,
+      price: existsProducts.filter(p => p.id === product.id)[0].price,
+    }))
 
+    const order = await orderRepositories.createOrder({
+      customer: customerExists,
+      products: serializadProducts,
+    })
+
+    // atualizando o estoque ao fazer uma venda
+    const { order_products } = order
+
+    const updateProductQuantity = order_products.map(product => ({
+      id: product.product_id,
+      quantity:
+        existsProducts.filter(p => p.id === product.product_id)[0].quantity -
+        product.quantity,
+    }))
+
+    await productsRepositories.save(updateProductQuantity)
+
+    return order
   }
 }
