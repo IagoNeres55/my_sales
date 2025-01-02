@@ -2,6 +2,7 @@ import AppError from '@shared/erros/AppError'
 import { User } from '../database/entities/User'
 import { usersRepositories } from '../database/repositories/UserRepositories'
 import { compare, hash } from 'bcrypt'
+import { instanceToInstance } from 'class-transformer'
 
 interface IUpdateProfile {
   user_id: number
@@ -56,6 +57,6 @@ export default class UpdateProfileService {
 
     await usersRepositories.save(user)
 
-    return user
+    return instanceToInstance(user)
   }
 }

@@ -4,7 +4,8 @@ import { usersRepositories } from '../database/repositories/UserRepositories'
 import AppError from '@shared/erros/AppError'
 import bcrypt from 'bcrypt'
 import { User } from '../database/entities/User'
-import { removeFields } from 'src/utils/removeFields'
+import { instanceToInstance } from 'class-transformer'
+
 
 interface ISessionResponse {
   user: User
@@ -33,15 +34,12 @@ export default class SessionUserService {
       throw new AppError('E-mail ou senha incorreto', 400)
     }
 
-
-
-
     const token = sign({}, JWT_SECRET, {
       subject: String(user.id),
       expiresIn: '24h',
     })
     return {
-      user: removeFields(user, ['password', 'created_at', 'updated_at']) as User,
+      user: instanceToInstance(user),
       token_type: 'Bearer',
       access_token: token,
     }

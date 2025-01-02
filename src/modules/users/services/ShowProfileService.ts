@@ -1,6 +1,7 @@
 import AppError from '@shared/erros/AppError'
 import { User } from '../database/entities/User'
 import { usersRepositories } from '../database/repositories/UserRepositories'
+import { instanceToInstance } from 'class-transformer'
 
 interface IShowProfile {
   user_id: number
@@ -14,6 +15,6 @@ export default class ShowProfileService {
       throw new AppError('User Not Found', 404)
     }
 
-    return user
+    return instanceToInstance(user)
   }
 }

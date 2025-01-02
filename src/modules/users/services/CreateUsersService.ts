@@ -2,7 +2,7 @@ import AppError from '@shared/erros/AppError'
 import { usersRepositories } from '../database/repositories/UserRepositories'
 import { User } from '../database/entities/User'
 import { hash } from 'bcrypt'
-import { removeFields } from 'src/utils/removeFields'
+import { instanceToInstance } from 'class-transformer'
 
 interface ICreateUser {
   name: string
@@ -26,8 +26,9 @@ export default class CreateUserService {
       password: hashedPassword,
     })
 
+    // remove a senha do get
     await usersRepositories.save(user)
 
-    return removeFields(user, ['password', 'updated_at']) as User
+    return instanceToInstance(user)
   }
 }
