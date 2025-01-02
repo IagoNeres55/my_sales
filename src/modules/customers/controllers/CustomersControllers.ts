@@ -6,9 +6,12 @@ import { UpdateCustomersService } from '../services/UpdateCustomersService'
 import DeleteCustomersService from '../services/DeleteCustomersService'
 
 export default class CustomersControllers {
-  public async index(_request: Request, response: Response): Promise<void> {
+  public async index(request: Request, response: Response): Promise<void> {
+    const page = parseInt(request.query.page as string) || 1
+    const limit = parseInt(request.query.limit as string) || 10
+
     const listCustomers = new ListCustomersService()
-    const customers = await listCustomers.execute()
+    const customers = await listCustomers.execute(page, limit)
     response.json(customers)
     return
   }
