@@ -1,3 +1,4 @@
+import RedisCache from '@shared/cache/RedisCache';
 import AppError from '@shared/erros/AppError'
 import { Product } from '../database/entities/Product'
 import { productsRepositories } from '../database/repositories/ProductsRepositories'
@@ -16,6 +17,11 @@ export default class UpdateProductService {
     price,
     quantity,
   }: IUpdateProduct): Promise<Product> {
+
+    // instanciando o cache para apagar
+    const redisCache = new RedisCache()
+
+
     // busca os produtos pelo Id informado.
     const product = await productsRepositories.findById(id)
 
@@ -38,6 +44,10 @@ export default class UpdateProductService {
     //salva no banco as informações
     await productsRepositories.save(product)
 
+    await redisCache.invalidade('api-mysales-PRODUCT_LIST')
+
     return product
   }
+
+
 }
