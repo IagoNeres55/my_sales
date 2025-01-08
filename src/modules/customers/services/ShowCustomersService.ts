@@ -1,6 +1,6 @@
 import AppError from '@shared/erros/AppError'
-import { Customers } from '../database/entities/Customers'
-import { customersRepositories } from '../database/repositories/CustomersRepositories'
+import { Customers } from '../infra/database/entities/Customers'
+import { customersRepositories } from '../infra/database/repositories/CustomersRepositories'
 
 interface IShowCustomer {
   id: number

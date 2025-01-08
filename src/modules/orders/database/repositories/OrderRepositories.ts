@@ -1,7 +1,6 @@
-import { AppDataSource } from '@shared/typeorm/data-source'
+import { AppDataSource } from '@shared/infra/typeorm/data-source'
 import { Order } from '../entities/Order'
-import { Customers } from '@modules/customers/database/entities/Customers'
-import { OrdersProducts } from '../entities/OrdersProducts'
+import { Customers } from '@modules/customers/infra/database/entities/Customers'
 
 interface ICreateOrder {
   customer: Customers
