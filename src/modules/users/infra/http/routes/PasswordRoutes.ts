@@ -1,7 +1,7 @@
 import { Router } from 'express'
+import { ForgotPasswordSchema, ResetPasswordSchema } from '../schemas/PasswordSchemas'
 import ForgotPasswordController from '../controllers/ForgotPasswordControllers'
 import ResetPasswordControllers from '../controllers/ResetPasswordControllers'
-import { ForgotPasswordSchema, ResetPasswordSchema } from '../schemas/PasswordSchemas'
 
 const passwordRouter = Router()
 

@@ -1,6 +1,6 @@
 import AppError from '@shared/erros/AppError'
-import { UserTokensRepositories } from '../database/repositories/UserTokensRepositories'
-import { usersRepositories } from '../database/repositories/UserRepositories'
+import { UserTokensRepositories } from '../infra/database/repositories/UserTokensRepositories'
+import { usersRepositories } from '../infra/database/repositories/UserRepositories'
 import { isAfter, addHours } from 'date-fns'
 import { hash } from 'bcrypt'
 

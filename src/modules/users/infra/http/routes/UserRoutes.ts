@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import UsersControlleres from '../controllers/UsersControllers'
 import { createUserSchema } from '../schemas/UserSchema'
 import AuthMiddleware from '@shared/middlewares/AuthMiddleware'
+import UsersControlleres from '../controllers/UsersControllers'
 
 const usersRouter = Router()
 

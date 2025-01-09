@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import ProfileControllers from '../controllers/ProfileControllers'
 import AuthMiddleware from '@shared/middlewares/AuthMiddleware'
+import ProfileControllers from '../controllers/ProfileControllers'
 
 const profileRouter = Router()
 const profileControllers = new ProfileControllers()

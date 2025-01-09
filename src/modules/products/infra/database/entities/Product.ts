@@ -1,4 +1,4 @@
-import { OrdersProducts } from '@modules/orders/database/entities/OrdersProducts'
+import { OrdersProducts } from 'src/modules/orders/infra/database/entities/OrdersProducts'
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 
 @Entity('products')

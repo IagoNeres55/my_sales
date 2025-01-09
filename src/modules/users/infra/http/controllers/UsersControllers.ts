@@ -1,7 +1,8 @@
+import CreateUserService from '@modules/users/services/CreateUsersService'
+import ListUsersService from '@modules/users/services/ListUsersService'
+import SessionUserService from '@modules/users/services/SessionUserService'
 import { Request, Response } from 'express'
-import ListUsersService from '../services/ListUsersService'
-import CreateUserService from '../services/CreateUsersService'
-import SessionUserService from '../services/SessionUserService'
+
 
 export default class UsersControlleres {
   public async index(_: Request, response: Response): Promise<void> {

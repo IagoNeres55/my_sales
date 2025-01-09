@@ -1,13 +1,14 @@
 import uploadConfig from '@config/upload'
-import customerRouter from '@modules/customers/infra/http/routes/CustomersRoutes'
-import orderRouter from '@modules/orders/routes/OrdersRoutes'
-import productsRouter from '@modules/products/routes/ProductsRouts'
-import avatarRouter from '@modules/users/routes/AvatarRoutes'
-import passwordRouter from '@modules/users/routes/PasswordRoutes'
-import profileRouter from '@modules/users/routes/ProfileRoutes'
-import sessionsRouter from '@modules/users/routes/SessionRoutes'
-import usersRouter from '@modules/users/routes/UserRoutes'
+
 import express, { Router } from 'express'
+import customerRouter from 'src/modules/customers/infra/http/routes/CustomersRoutes'
+import orderRouter from 'src/modules/orders/infra/http/routes/OrdersRoutes'
+import productsRouter from 'src/modules/products/infra/http/routes/ProductsRouts'
+import avatarRouter from 'src/modules/users/infra/http/routes/AvatarRoutes'
+import passwordRouter from 'src/modules/users/infra/http/routes/PasswordRoutes'
+import profileRouter from 'src/modules/users/infra/http/routes/ProfileRoutes'
+import sessionsRouter from 'src/modules/users/infra/http/routes/SessionRoutes'
+import usersRouter from 'src/modules/users/infra/http/routes/UserRoutes'
 // import express from 'express';
 const routes = Router()
 // const port = 3000

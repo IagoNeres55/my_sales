@@ -1,5 +1,5 @@
 import AppError from '@shared/erros/AppError'
-import { productsRepositories } from '../database/repositories/ProductsRepositories'
+import { productsRepositories } from '../infra/database/repositories/ProductsRepositories'
 import RedisCache from '@shared/cache/RedisCache'
 
 export default class DeleteProductService {

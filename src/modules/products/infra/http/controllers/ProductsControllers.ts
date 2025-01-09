@@ -1,9 +1,10 @@
+import CreateProductService from '@modules/products/services/CreateProductService'
+import DeleteProductService from '@modules/products/services/DeleteProductService'
+import ListProdutcService from '@modules/products/services/ListProductService'
+import ShowProductService from '@modules/products/services/ShowProductService'
+import UpdateProductService from '@modules/products/services/UpdateProductService'
 import { Request, Response } from 'express'
-import ListProdutcService from '../services/ListProductService'
-import ShowProductService from '../services/ShowProductService'
-import CreateProductService from '../services/CreateProductService'
-import DeleteProductService from '../services/DeleteProductService'
-import UpdateProductService from '../services/UpdateProductService'
+
 
 
 export default class ProductsControllers {

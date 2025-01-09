@@ -1,7 +1,7 @@
 import { Router } from 'express'
 
-import SessionsControllers from '../controllers/SessionsControllers'
 import { sessionSchema } from '../schemas/SessionSchema'
+import SessionsControllers from '../controllers/SessionsControllers'
 
 const sessionsRouter = Router()
 

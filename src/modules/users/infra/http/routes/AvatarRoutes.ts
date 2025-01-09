@@ -1,8 +1,8 @@
 import uploadConfig from '@config/upload'
 import { Router } from 'express'
-import UpdateAvatarControllers from '../controllers/UpdateAvatarControllers'
 import multer from 'multer'
 import AuthMiddleware from '@shared/middlewares/AuthMiddleware'
+import UpdateAvatarControllers from '../controllers/UpdateAvatarControllers'
 
 const avatarRouter = Router()
 

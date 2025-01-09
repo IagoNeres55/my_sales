@@ -1,4 +1,3 @@
-import { Customers } from '@modules/customers/infra/database/entities/Customers'
 import {
   CreateDateColumn,
   Entity,
@@ -9,6 +8,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm'
 import { OrdersProducts } from './OrdersProducts'
+import { Customers } from 'src/modules/customers/infra/database/entities/Customers'
 
 @Entity('orders')
 export class Order {

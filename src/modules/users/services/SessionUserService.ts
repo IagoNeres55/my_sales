@@ -1,9 +1,9 @@
 import { Secret, sign } from 'jsonwebtoken'
 import 'dotenv/config'
-import { usersRepositories } from '../database/repositories/UserRepositories'
+import { usersRepositories } from '../infra/database/repositories/UserRepositories'
 import AppError from '@shared/erros/AppError'
 import bcrypt from 'bcrypt'
-import { User } from '../database/entities/User'
+import { User } from '../infra/database/entities/User'
 import { instanceToInstance } from 'class-transformer'
 
 
