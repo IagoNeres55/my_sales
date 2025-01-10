@@ -1,19 +1,22 @@
 import { AppDataSource } from '@shared/infra/typeorm/data-source'
 import { Order } from '../entities/Order'
-import { ICreateOrderCustomer } from '@modules/orders/domain/models/ICreateOrderCustomer';
+import { ICreateOrderCustomer } from '@modules/orders/domain/models/ICreateOrderCustomer'
+import { plainToInstance } from 'class-transformer'
 
 export const orderRepositories = AppDataSource.getRepository(Order).extend({
   async findById(id: number): Promise<Order | null> {
-
     const order = await this.findOne({
       where: { id },
-      relations: ['order_products', 'customer'],
+      relations: ['order_products.product', 'order_products', 'customer'],
     })
 
-    return order
+    return plainToInstance(Order, order)
   },
 
-  async createOrder({ customer, products }: ICreateOrderCustomer): Promise<Order> {
+  async createOrder({
+    customer,
+    products,
+  }: ICreateOrderCustomer): Promise<Order> {
     const order = this.create({
       customer,
       order_products: products,

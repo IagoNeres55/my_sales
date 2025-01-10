@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
+import { Exclude } from 'class-transformer'
 
 @Entity('products')
 export class Product implements IProduct {
@@ -17,15 +18,18 @@ export class Product implements IProduct {
   @Column({ type: 'text' })
   name: string
 
+  @Exclude()
   @Column({ type: 'decimal' })
   price: number
 
   @Column({ type: 'int' })
   quantity: number
 
+  @Exclude()
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date
 
+  @Exclude()
   @UpdateDateColumn({ type: 'timestamp' })
   updated_at: Date
 

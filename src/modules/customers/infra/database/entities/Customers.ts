@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
+import { Exclude } from 'class-transformer'
 
 @Entity('customers')
 export class Customers implements ICustomer {
@@ -18,9 +19,11 @@ export class Customers implements ICustomer {
   @Column({ type: 'text' })
   email: string
 
+  @Exclude()
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date
 
+  @Exclude()
   @UpdateDateColumn({ type: 'timestamp' })
   updated_at: Date
 }

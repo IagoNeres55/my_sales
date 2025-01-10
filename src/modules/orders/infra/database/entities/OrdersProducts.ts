@@ -10,6 +10,7 @@ import {
 import { Order } from './Order'
 import { Product } from 'src/modules/products/infra/database/entities/Product'
 import { IOrdersProducts } from '@modules/orders/domain/models/IOrdersProducts'
+import { Exclude } from 'class-transformer'
 
 @Entity('orders_products')
 export class OrdersProducts implements IOrdersProducts {
@@ -40,6 +41,7 @@ export class OrdersProducts implements IOrdersProducts {
   @JoinColumn({ name: 'product_id' })
   product: Product
 
+  @Exclude()
   @Column()
   product_id: string
 }
