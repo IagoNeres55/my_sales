@@ -1,10 +1,8 @@
 import AppError from '@shared/erros/AppError'
 import { Customers } from '../infra/database/entities/Customers'
 import { customersRepositories } from '../infra/database/repositories/CustomersRepositories'
+import { IShowCustomer } from '../domain/models/IShowCustomer'
 
-interface IShowCustomer {
-  id: number
-}
 
 export class ShowCustomersService {
   public async execute({ id }: IShowCustomer): Promise<Customers> {

@@ -1,15 +1,9 @@
 import { Order } from '../infra/database/entities/Order'
 import AppError from '@shared/erros/AppError'
 import { orderRepositories } from '../infra/database/repositories/OrderRepositories'
-import { Product } from 'src/modules/products/infra/database/entities/Product'
 import { customersRepositories } from 'src/modules/customers/infra/database/repositories/CustomersRepositories'
 import { productsRepositories } from 'src/modules/products/infra/database/repositories/ProductsRepositories'
-
-interface ICreateOrder {
-  customer_id: string
-  products: Product[]
-}
-
+import { ICreateOrder } from '../domain/models/ICreateOrder'
 export default class CreateOrderService {
   async execute({ customer_id, products }: ICreateOrder): Promise<Order> {
     const customerExists = await customersRepositories.findById(
@@ -51,7 +45,6 @@ export default class CreateOrderService {
       return estoqueExists && estoqueExists.quantity < product.quantity
     })
 
-    console.log(quantityAvalible)
 
     if (quantityAvalible.length > 0) {
       throw new AppError(`Produto não tem estoque suficiente`, 409)

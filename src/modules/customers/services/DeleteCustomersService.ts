@@ -1,9 +1,6 @@
 import AppError from '@shared/erros/AppError'
 import { customersRepositories } from '../infra/database/repositories/CustomersRepositories'
-
-interface IDeleteCustomer {
-  id: number
-}
+import { IDeleteCustomer } from '../domain/models/IDeleteCustomer'
 
 export default class DeleteCustomersService {
   public async execute({ id }: IDeleteCustomer): Promise<void> {

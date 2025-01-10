@@ -1,12 +1,9 @@
 import AppError from '@shared/erros/AppError'
 import { Customers } from '../infra/database/entities/Customers'
 import { customersRepositories } from '../infra/database/repositories/CustomersRepositories'
+import { IUpdateCustomers } from '../domain/models/IUpdateCustomers'
 
-interface IUpdateCustomers {
-  id: number
-  name: string
-  email: string
-}
+
 
 export class UpdateCustomersService {
   public async execute({

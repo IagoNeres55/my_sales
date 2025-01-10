@@ -9,11 +9,12 @@ import {
 } from 'typeorm'
 import { OrdersProducts } from './OrdersProducts'
 import { Customers } from 'src/modules/customers/infra/database/entities/Customers'
+import { IOrder } from '@modules/orders/domain/models/IOrder'
 
 @Entity('orders')
-export class Order {
+export class Order implements IOrder {
   @PrimaryGeneratedColumn()
-  id: Number
+  id: number
 
   @ManyToOne(() => Customers)
   @JoinColumn({ name: 'customer_id' })

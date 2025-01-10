@@ -1,17 +1,6 @@
 import { AppDataSource } from '@shared/infra/typeorm/data-source'
 import { Order } from '../entities/Order'
-import { Customers } from '@modules/customers/infra/database/entities/Customers'
-
-interface ICreateOrder {
-  customer: Customers
-  products: ICreateOrderProducts[]
-}
-
-interface ICreateOrderProducts {
-  product_id: string
-  price: number
-  quantity: number
-}
+import { ICreateOrderCustomer } from '@modules/orders/domain/models/ICreateOrderCustomer';
 
 export const orderRepositories = AppDataSource.getRepository(Order).extend({
   async findById(id: number): Promise<Order | null> {
@@ -24,7 +13,7 @@ export const orderRepositories = AppDataSource.getRepository(Order).extend({
     return order
   },
 
-  async createOrder({ customer, products }: ICreateOrder): Promise<Order> {
+  async createOrder({ customer, products }: ICreateOrderCustomer): Promise<Order> {
     const order = this.create({
       customer,
       order_products: products,

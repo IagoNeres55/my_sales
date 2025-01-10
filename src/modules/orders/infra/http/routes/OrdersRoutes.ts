@@ -2,7 +2,6 @@ import { Router } from 'express'
 import OrdersController from '../controllers/OrdersControllers'
 import AuthMiddleware from '@shared/middlewares/AuthMiddleware'
 import { createOrderValidate, idParamsValidate } from '../schemas/OrderSchema'
-3
 
 const orderRouter = Router()
 
