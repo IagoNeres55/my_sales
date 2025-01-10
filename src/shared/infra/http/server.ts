@@ -6,6 +6,7 @@ import routes from './routes'
 import ErrorHandleMiddleware from '../../middlewares/ErrorHandleMiddleware'
 import { AppDataSource } from '@shared/infra/typeorm/data-source'
 import { errors } from 'celebrate'
+import '@shared/container'
 import rateLimiter from '@shared/middlewares/rateLimiter'
 
 AppDataSource.initialize()

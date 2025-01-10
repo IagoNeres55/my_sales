@@ -1,13 +1,14 @@
 import { IPagination } from '@shared/interfaces/pagination.interface'
 import { Customers } from '../infra/database/entities/Customers'
-import { customersRepositories } from '../infra/database/repositories/CustomersRepositories'
+import { ICustomersRepository } from '../domain/repositories/ICustomersRepositories'
 
 export class ListCustomersService {
+  constructor(private readonly customersRepositories: ICustomersRepository) {}
   public async execute(
     page: number = 1,
     limit: number = 10,
   ): Promise<IPagination<Customers>> {
-    const [data, total] = await customersRepositories.findAndCount({
+    const [data, total] = await this.customersRepositories.findAndCount({
       take: limit,
       skip: (page - 1) * limit,
     })

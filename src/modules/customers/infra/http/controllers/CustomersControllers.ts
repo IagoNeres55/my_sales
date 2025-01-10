@@ -4,6 +4,7 @@ import CreateCustomersService from '../../../services/CreateCustomersServeice'
 import { ShowCustomersService } from '../../../services/ShowCustomersService'
 import { UpdateCustomersService } from '../../..//services/UpdateCustomersService'
 import DeleteCustomersService from '../../../services/DeleteCustomersService'
+import { container } from 'tsyringe'
 
 export default class CustomersControllers {
   public async index(request: Request, response: Response): Promise<void> {
@@ -26,7 +27,9 @@ export default class CustomersControllers {
 
   public async create(request: Request, response: Response): Promise<void> {
     const { name, email } = request.body
-    const createCustomers = new CreateCustomersService()
+
+    // solicitando ao o container resolver a dependencia de CreateCustomersService está injetando a classe
+    const createCustomers = container.resolve(CreateCustomersService)
     const customers = await createCustomers.execute({ name, email })
     response.json(customers)
     return
