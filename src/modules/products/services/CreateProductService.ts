@@ -2,15 +2,10 @@ import AppError from '@shared/erros/AppError'
 import { Product } from '../infra/database/entities/Product'
 import { productsRepositories } from '../infra/database/repositories/ProductsRepositories'
 import RedisCache from '@shared/cache/RedisCache'
-
-interface IcreateProduct {
-  name: string
-  price: number
-  quantity: number
-}
+import { ICreateProduct } from '../domain/models/ICreateProduct'
 
 export default class CreateProductService {
-  async execute({ name, price, quantity }: IcreateProduct): Promise<Product> {
+  async execute({ name, price, quantity }: ICreateProduct): Promise<Product> {
 
 const redisCache = new RedisCache()
 

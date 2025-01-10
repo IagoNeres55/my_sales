@@ -5,11 +5,7 @@ import path from 'path'
 import uploadConfig from '@config/upload'
 import fs from 'fs'
 import { instanceToInstance } from 'class-transformer'
-
-interface IUpdateUserAvatar {
-  userId: string
-  avatarFileName: string
-}
+import { IUpdateUserAvatar } from '../domain/models/IUpdateUserAvatar'
 
 export default class UpdateUserAvatarService {
   async execute({ userId, avatarFileName }: IUpdateUserAvatar): Promise<User> {

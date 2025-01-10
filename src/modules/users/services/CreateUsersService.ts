@@ -3,12 +3,9 @@ import { usersRepositories } from '../infra/database/repositories/UserRepositori
 import { User } from '../infra/database/entities/User'
 import { hash } from 'bcrypt'
 import { instanceToInstance } from 'class-transformer'
+import { ICreateUser } from '../domain/models/ICreateUser'
 
-interface ICreateUser {
-  name: string
-  email: string
-  password: string
-}
+
 
 export default class CreateUserService {
   async execute({ name, email, password }: ICreateUser): Promise<User> {

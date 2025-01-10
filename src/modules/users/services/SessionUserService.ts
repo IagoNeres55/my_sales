@@ -5,18 +5,9 @@ import AppError from '@shared/erros/AppError'
 import bcrypt from 'bcrypt'
 import { User } from '../infra/database/entities/User'
 import { instanceToInstance } from 'class-transformer'
+import { ISessionUser } from '../domain/models/ISessionUser'
+import { ISessionResponse } from '../domain/models/ISessionResponse'
 
-
-interface ISessionResponse {
-  user: User
-  access_token: string
-  token_type: string
-}
-
-interface ISessionUser {
-  email: string
-  password: string
-}
 
 const JWT_SECRET = process.env.SECRET_KEY_JWT as Secret
 

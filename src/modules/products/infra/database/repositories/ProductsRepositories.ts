@@ -1,10 +1,7 @@
 import { AppDataSource } from '@shared/infra/typeorm/data-source'
 import { Product } from '../entities/Product'
 import { In } from 'typeorm'
-
-interface IFindProducts {
-  id: string
-}
+import { IFindProducts } from '@modules/products/domain/models/IFindProducts'
 
 export const productsRepositories = AppDataSource.getRepository(Product).extend(
   {
