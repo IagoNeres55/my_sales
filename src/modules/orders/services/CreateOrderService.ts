@@ -1,14 +1,16 @@
 import { Order } from '../infra/database/entities/Order'
 import AppError from '@shared/erros/AppError'
 import { orderRepositories } from '../infra/database/repositories/OrderRepositories'
-import { customersRepositories } from 'src/modules/customers/infra/database/repositories/CustomersRepositories'
 import { productsRepositories } from 'src/modules/products/infra/database/repositories/ProductsRepositories'
 import { ICreateOrder } from '../domain/models/ICreateOrder'
+import { container } from 'tsyringe'
+import { customersRepository } from '@modules/customers/infra/database/repositories/CustomersRepositories'
+
 export default class CreateOrderService {
   async execute({ customer_id, products }: ICreateOrder): Promise<Order> {
-    const customerExists = await customersRepositories.findById(
-      Number(customer_id),
-    )
+    const customer = container.resolve(customersRepository)
+
+    const customerExists = await customer.findById(Number(customer_id))
 
     if (!customerExists) {
       throw new AppError('Não existe clientes com o id informado')
@@ -44,7 +46,6 @@ export default class CreateOrderService {
       // Verifica se o estoque é insuficiente
       return estoqueExists && estoqueExists.quantity < product.quantity
     })
-
 
     if (quantityAvalible.length > 0) {
       throw new AppError(`Produto não tem estoque suficiente`, 409)

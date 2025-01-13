@@ -7,7 +7,7 @@ export interface Pagination {
 }
 
 // criando um contrato de dominio
-export interface ICustomersRepository {
+export default interface ICustomersRepository {
   create(data: ICreateCustomer): Promise<ICustomer>
   save(customer: ICreateCustomer): Promise<ICustomer>
   remove(customer: ICustomer): Promise<void>

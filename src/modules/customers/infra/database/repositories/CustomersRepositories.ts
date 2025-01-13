@@ -1,15 +1,12 @@
 import { AppDataSource } from '@shared/infra/typeorm/data-source'
 import { Customers } from '../entities/Customers'
-import {
-  ICustomersRepository,
-  Pagination,
-} from '@modules/customers/domain/repositories/ICustomersRepositories'
+import ICustomersRepository, { Pagination } from '@modules/customers/domain/repositories/ICustomersRepositories'
 import { Repository } from 'typeorm'
 import { ICustomer } from '@modules/customers/domain/models/ICustomer'
 import { ICreateCustomer } from '@modules/customers/domain/models/ICreateCustomer'
 // import { Like } from 'typeorm'
 
-export default class customersRepository implements ICustomersRepository {
+export class customersRepository implements ICustomersRepository {
   private ormRepository: Repository<Customers>
 
   constructor() {
@@ -36,6 +33,7 @@ export default class customersRepository implements ICustomersRepository {
     const customer = await this.ormRepository.findOneBy({ email })
     return customer
   }
+
   async findById(id: number): Promise<ICustomer | null> {
     const customer = await this.ormRepository.findOneBy({ id })
     return customer

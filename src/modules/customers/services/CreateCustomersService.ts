@@ -1,9 +1,8 @@
 import AppError from '@shared/erros/AppError'
 import { Customers } from '../infra/database/entities/Customers'
 import { ICreateCustomer } from '../domain/models/ICreateCustomer'
-import { ICustomersRepository } from '../domain/repositories/ICustomersRepositories'
 import { inject, injectable } from 'tsyringe'
-
+import ICustomersRepository from '../domain/repositories/ICustomersRepositories'
 
 // falando que essa class é injetavel
 @injectable()
@@ -12,8 +11,9 @@ export default class CreateCustomersService {
   // fazemos a validação para ele conhecer somente a interface e a partir dela acessar o repositorio
   constructor(
     // referenciando o container criado em shared
+    // @ts-ignore
     @inject('CustomerRepository')
-    private readonly customersRepositories: ICustomersRepository
+    private readonly customersRepositories: ICustomersRepository,
   ) {}
 
   public async execute({ name, email }: ICreateCustomer): Promise<Customers> {

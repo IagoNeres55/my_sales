@@ -1,9 +1,15 @@
 import { IPagination } from '@shared/interfaces/pagination.interface'
 import { Customers } from '../infra/database/entities/Customers'
-import { ICustomersRepository } from '../domain/repositories/ICustomersRepositories'
+import ICustomersRepository from '../domain/repositories/ICustomersRepositories'
+import { inject, injectable } from 'tsyringe'
 
+@injectable()
 export class ListCustomersService {
-  constructor(private readonly customersRepositories: ICustomersRepository) {}
+  constructor(
+    // @ts-ignore
+    @inject('CustomerRepository')
+    private readonly customersRepositories: ICustomersRepository,
+  ) {}
   public async execute(
     page: number = 1,
     limit: number = 10,
