@@ -11,6 +11,7 @@ const customerRouter = Router()
 
 const costumersControllers = new CustomersControllers()
 
+
 customerRouter.use(AuthMiddleware.execute)
 customerRouter.get('/', costumersControllers.index)
 customerRouter.get('/:id', costumersControllers.show)

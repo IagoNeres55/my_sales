@@ -15,7 +15,23 @@ const routes = Router()
 // const app = express();
 
 // app.use(express.json());
+
+/**
+ * @swagger
+ * /test:
+ *   get:
+ *     description: Rota de teste
+ *     responses:
+ *       200:
+ *         description: Sucesso
+ */
+routes.get('/test', (req, res) => {
+  res.send('Rota de teste funcionando!')
+})
+
 routes.use('/products', productsRouter)
+
+
 routes.use('/users', usersRouter)
 routes.use('/sessions', sessionsRouter)
 routes.use('/avatar', avatarRouter)
@@ -28,7 +44,6 @@ routes.use('/passwords', passwordRouter)
 routes.use('/profiles', profileRouter)
 routes.use('/customers', customerRouter)
 routes.use('/orders', orderRouter)
-
 
 routes.get('/health', (req, res) => {
   res.json({ message: 'Hellow Dev!' })

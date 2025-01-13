@@ -9,6 +9,9 @@ import { errors } from 'celebrate'
 import '@shared/container'
 import rateLimiter from '@shared/middlewares/rateLimiter'
 
+import swaggerUi from 'swagger-ui-express';
+import swaggerFile from '../../../swagger-output.json';
+
 AppDataSource.initialize()
   .then(async () => {
     const app = express()
@@ -16,6 +19,9 @@ AppDataSource.initialize()
     app.use(cors())
     app.use(express.json())
     app.use(rateLimiter)
+
+
+    app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
     app.use(routes)
 
