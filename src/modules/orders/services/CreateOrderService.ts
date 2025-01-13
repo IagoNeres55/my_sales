@@ -1,13 +1,17 @@
 import { Order } from '../infra/database/entities/Order'
 import AppError from '@shared/erros/AppError'
-import { orderRepositories } from '../infra/database/repositories/OrderRepositories'
 import { productsRepositories } from 'src/modules/products/infra/database/repositories/ProductsRepositories'
 import { ICreateOrder } from '../domain/models/ICreateOrder'
-import { container } from 'tsyringe'
+import { container, inject, injectable } from 'tsyringe'
 import { customersRepository } from '@modules/customers/infra/database/repositories/CustomersRepositories'
-
-export default class CreateOrderService {
-  async execute({ customer_id, products }: ICreateOrder): Promise<Order> {
+import IOrdersRepository from '../domain/repositories/IOrdersRepositories'
+@injectable()
+export class CreateOrderService {
+  constructor (
+    // @ts-ignore
+    @inject('OrdersRepository') private readonly ordersRepositories: IOrdersRepository,
+  ){}
+  public async execute({ customer_id, products }: ICreateOrder): Promise<Order> {
     const customer = container.resolve(customersRepository)
 
     const customerExists = await customer.findById(Number(customer_id))
@@ -58,7 +62,7 @@ export default class CreateOrderService {
       price: existsProducts.filter(p => p.id === product.id)[0].price,
     }))
 
-    const order = await orderRepositories.createOrder({
+    const order = await this.ordersRepositories.createOrder({
       customer: customerExists,
       products: serializadProducts,
     })

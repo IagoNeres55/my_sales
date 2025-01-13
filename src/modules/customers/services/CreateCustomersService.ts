@@ -6,7 +6,7 @@ import ICustomersRepository from '../domain/repositories/ICustomersRepositories'
 
 // falando que essa class é injetavel
 @injectable()
-export default class CreateCustomersService {
+export class CreateCustomersService {
   // o customersRepositories não pode conhecer a implementação do repositorio
   // fazemos a validação para ele conhecer somente a interface e a partir dela acessar o repositorio
   constructor(

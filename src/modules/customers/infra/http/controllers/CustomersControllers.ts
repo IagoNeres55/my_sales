@@ -1,11 +1,11 @@
 import { Request, Response } from 'express'
 import { ListCustomersService } from '../../../services/ListCustomersService'
-import CreateCustomersService from '../../../services/CreateCustomersService'
 import { ShowCustomersService } from '../../../services/ShowCustomersService'
 import { UpdateCustomersService } from '../../..//services/UpdateCustomersService'
 import DeleteCustomersService from '../../../services/DeleteCustomersService'
 import { container } from 'tsyringe'
 import { ICustomer } from '@modules/customers/domain/models/ICustomer'
+import { CreateCustomersService } from '@modules/customers/services/CreateCustomersService'
 
 export default class CustomersControllers {
   public async index(request: Request, response: Response): Promise<void> {
