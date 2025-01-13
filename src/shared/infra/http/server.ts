@@ -10,7 +10,7 @@ import '@shared/container'
 import rateLimiter from '@shared/middlewares/rateLimiter'
 
 import swaggerUi from 'swagger-ui-express';
-import swaggerFile from '../../../swagger-output.json';
+import swaggerFile from '../../../swagger/swagger-output.json';
 
 AppDataSource.initialize()
   .then(async () => {
