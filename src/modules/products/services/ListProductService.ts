@@ -1,7 +1,6 @@
-import { productRepository } from './../infra/database/repositories/ProductsRepositories';
 import RedisCache from '@shared/cache/RedisCache'
 import { Product } from '../infra/database/entities/Product'
-import { injectable } from 'tsyringe'
+import { inject, injectable } from 'tsyringe'
 import IProductsRepository from '../domain/repositories/IProductsRepositories';
 
 @injectable()

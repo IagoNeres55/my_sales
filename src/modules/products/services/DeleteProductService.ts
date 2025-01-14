@@ -1,7 +1,7 @@
 import AppError from '@shared/erros/AppError'
 import RedisCache from '@shared/cache/RedisCache'
 import IProductsRepository from '../domain/repositories/IProductsRepositories'
-import { injectable } from 'tsyringe'
+import { inject, injectable } from 'tsyringe'
 
 @injectable()
 export default class DeleteProductService {

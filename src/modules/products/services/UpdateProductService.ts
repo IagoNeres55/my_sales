@@ -3,7 +3,7 @@ import AppError from '@shared/erros/AppError'
 import { Product } from '../infra/database/entities/Product'
 import { IUpdateProduct } from '../domain/models/IUpdateProduct';
 import IProductsRepository from '../domain/repositories/IProductsRepositories';
-import { injectable } from 'tsyringe';
+import { inject, injectable } from 'tsyringe';
 
 @injectable()
 export default class UpdateProductService {
