@@ -20,7 +20,6 @@ AppDataSource.initialize()
     app.use(express.json())
     app.use(rateLimiter)
 
-
     app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
     app.use(routes)

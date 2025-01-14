@@ -1,5 +1,5 @@
+import { productsRepositories } from 'src/modules/products/infra/database/repositories/ProductsRepositories';
 import AppError from '@shared/erros/AppError'
-import { productsRepositories } from '../infra/database/repositories/ProductsRepositories'
 import { Product } from '../infra/database/entities/Product'
 
 export default class ShowProductService {
