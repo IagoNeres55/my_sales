@@ -1,10 +1,19 @@
 import RedisCache from '@shared/cache/RedisCache';
 import AppError from '@shared/erros/AppError'
 import { Product } from '../infra/database/entities/Product'
-import { productsRepositories } from '../infra/database/repositories/ProductsRepositories'
 import { IUpdateProduct } from '../domain/models/IUpdateProduct';
+import IProductsRepository from '../domain/repositories/IProductsRepositories';
+import { injectable } from 'tsyringe';
 
+@injectable()
 export default class UpdateProductService {
+
+  constructor(
+    // @ts-ignore
+    @inject('ProductRepository')
+    private readonly productsRepositories: IProductsRepository,
+  ) {}
+
   async execute({
     id,
     name,
@@ -17,14 +26,14 @@ export default class UpdateProductService {
 
 
     // busca os produtos pelo Id informado.
-    const product = await productsRepositories.findById(id)
+    const product = await this.productsRepositories.findById(id)
 
     //faz uma validação caso não tenha nenhum produto encontrado.
     if (!product) {
       throw new AppError('Produto não encontrado', 404)
     }
 
-    const productsExists = await productsRepositories.findByName(name)
+    const productsExists = await this.productsRepositories.findByName(name)
 
     if (productsExists) {
       throw new AppError('Existe Produtos já cadastrados com esse nome', 409)
@@ -36,7 +45,7 @@ export default class UpdateProductService {
     product.quantity = quantity
 
     //salva no banco as informações
-    await productsRepositories.save(product)
+    await this.productsRepositories.save(product)
 
     await redisCache.invalidade('api-mysales-PRODUCT_LIST')
 

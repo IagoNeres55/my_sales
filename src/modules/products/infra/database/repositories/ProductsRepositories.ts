@@ -2,9 +2,11 @@ import { AppDataSource } from '@shared/infra/typeorm/data-source'
 import { Product } from '../entities/Product'
 import { In, Repository } from 'typeorm'
 import IProductsRepository from '@modules/products/domain/repositories/IProductsRepositories'
-import { ICreateProduct } from '@modules/orders/domain/models/ICreateProduct'
 import { IProduct } from '@modules/products/domain/models/IProduct'
 import { IFindProducts } from '@modules/products/domain/models/IFindProducts'
+import { ICreateProduct } from '@modules/products/domain/models/ICreateProduct'
+import { IUpdateProduct } from '@modules/products/domain/models/IUpdateProduct'
+import { IUpdateStockProduct } from '@modules/products/domain/models/IUpdateStockProduct'
 
 // export const productsRepositories = AppDataSource.getRepository(Product).extend(
 //   {
@@ -49,7 +51,7 @@ export class productRepository implements IProductsRepository {
   }
 
   async save(product: IProduct): Promise<IProduct> {
-    await this.ormRepository.remove(product)
+    await this.ormRepository.save(product)
     return product
   }
 
@@ -69,5 +71,16 @@ export class productRepository implements IProductsRepository {
       where: { id: In(productsIds) },
     })
     return produtos
+  }
+
+  async find(): Promise<Product[]> {
+    const products = await this.ormRepository.find()
+    return products
+  }
+
+  async update(product: IUpdateStockProduct): Promise<IProduct> {
+    const products = await this.ormRepository.save(product)
+
+    return products
   }
 }

@@ -1,10 +1,10 @@
 import { Order } from '../infra/database/entities/Order'
 import AppError from '@shared/erros/AppError'
-import { productsRepositories } from 'src/modules/products/infra/database/repositories/ProductsRepositories'
 import { ICreateOrder } from '../domain/models/ICreateOrder'
 import { container, inject, injectable } from 'tsyringe'
 import { customersRepository } from '@modules/customers/infra/database/repositories/CustomersRepositories'
 import IOrdersRepository from '../domain/repositories/IOrdersRepositories'
+import { productRepository } from '@modules/products/infra/database/repositories/ProductsRepositories'
 @injectable()
 export class CreateOrderService {
   constructor (
@@ -20,7 +20,8 @@ export class CreateOrderService {
       throw new AppError('Não existe clientes com o id informado')
     }
 
-    const existsProducts = await productsRepositories.findAllByIds(products)
+    const product = container.resolve(productRepository)
+    const existsProducts = await product.findAllByIds(products)
 
     if (!existsProducts.length) {
       throw new AppError('Não existe produtos com o id informado')
@@ -77,7 +78,7 @@ export class CreateOrderService {
         product.quantity,
     }))
 
-    await productsRepositories.save(updateProductQuantity)
+    await product.update(updateProductQuantity[0])
 
     return order
   }
