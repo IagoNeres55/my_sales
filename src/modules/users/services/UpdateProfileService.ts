@@ -1,28 +1,37 @@
 import AppError from '@shared/erros/AppError'
-import { User } from '../infra/database/entities/User'
-import { usersRepositories } from '../infra/database/repositories/UserRepositories'
 import { compare, hash } from 'bcrypt'
 import { instanceToInstance } from 'class-transformer'
 import { IUpdateProfile } from '../domain/models/IUpdateProfile'
+import { inject, injectable } from 'tsyringe'
+import IUsersRepository from '../domain/repositories/IUsersRepositories'
+import { IUser } from '../domain/models/IUser'
 
 
-
+@injectable()
 export default class UpdateProfileService {
+
+  constructor(
+    //@ts-ignore
+    @inject('UserRepository')
+    private readonly usersRepositories: IUsersRepository,
+  ) {}
+
+
   async execute({
     user_id,
     name,
     email,
     password,
     old_password,
-  }: IUpdateProfile): Promise<User> {
-    const user = await usersRepositories.findById(user_id)
+  }: IUpdateProfile): Promise<IUser> {
+    const user = await this.usersRepositories.findById(user_id)
 
     // validar usuário existente
     if (!user) {
       throw new AppError('User not found', 404)
     }
     if (email) {
-      const userUpdateEmail = await usersRepositories.findByEmail(email)
+      const userUpdateEmail = await this.usersRepositories.findByEmail(email)
 
       // validar se o email informado não esta sendo utilizado
       if (userUpdateEmail) {
@@ -50,7 +59,7 @@ export default class UpdateProfileService {
       user.name = name
     }
 
-    await usersRepositories.save(user)
+    await this.usersRepositories.save(user)
 
     return instanceToInstance(user)
   }

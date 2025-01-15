@@ -1,20 +1,25 @@
 import { Secret, sign } from 'jsonwebtoken'
 import 'dotenv/config'
-import { usersRepositories } from '../infra/database/repositories/UserRepositories'
 import AppError from '@shared/erros/AppError'
 import bcrypt from 'bcrypt'
-import { User } from '../infra/database/entities/User'
 import { instanceToInstance } from 'class-transformer'
 import { ISessionUser } from '../domain/models/ISessionUser'
 import { ISessionResponse } from '../domain/models/ISessionResponse'
-
+import IUsersRepository from '../domain/repositories/IUsersRepositories'
+import { inject, injectable } from 'tsyringe'
 
 const JWT_SECRET = process.env.SECRET_KEY_JWT as Secret
 
+@injectable()
 export default class SessionUserService {
-  async execute({ email, password }: ISessionUser): Promise<ISessionResponse> {
-    const user = await usersRepositories.findByEmail(email)
+  constructor(
+    //@ts-ignore
+    @inject('UserRepository')
+    private readonly usersRepositories: IUsersRepository,
+  ) {}
 
+  async execute({ email, password }: ISessionUser): Promise<ISessionResponse> {
+    const user = await this.usersRepositories.findByEmail(email)
     if (!user) {
       throw new AppError('E-mail não encontrado', 400)
     }

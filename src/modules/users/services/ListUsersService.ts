@@ -1,10 +1,18 @@
 import { instanceToInstance } from 'class-transformer'
-import { User } from '../infra/database/entities/User'
-import { usersRepositories } from '../infra/database/repositories/UserRepositories'
+import { inject, injectable } from 'tsyringe'
+import IUsersRepository from '../domain/repositories/IUsersRepositories'
+import { IUser } from '../domain/models/IUser'
 
+@injectable()
 export default class ListUsersService {
-  async execute(): Promise<User[]> {
-    const users = await usersRepositories.find()
+  constructor(
+    //@ts-ignore
+    @inject('UserRepository')
+    private readonly usersRepositories: IUsersRepository,
+  ) {}
+
+  async execute(): Promise<IUser[]> {
+    const users = await this.usersRepositories.find()
     return instanceToInstance(users)
   }
 }

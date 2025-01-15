@@ -1,16 +1,44 @@
 import { AppDataSource } from '@shared/infra/typeorm/data-source'
 import { User } from '../entities/User'
+import IUsersRepository from '@modules/users/domain/repositories/IUsersRepositories'
+import { ICreateUser } from '@modules/users/domain/models/ICreateUser'
+import { IUser } from '@modules/users/domain/models/IUser'
+import { Repository } from 'typeorm'
+export class userRepositories implements IUsersRepository {
+  private ormRepository: Repository<User>
 
-export const usersRepositories = AppDataSource.getRepository(User).extend({
-  async findByName(name: string): Promise<User | null> {
-    return this.findOneBy({ name })
-  },
+  constructor() {
+    this.ormRepository = AppDataSource.getRepository(User)
+  }
 
-  async findById(id: number): Promise<User | null> {
-    return this.findOneBy({ id })
-  },
+  async create(user: ICreateUser): Promise<IUser> {
+    const createUser = this.ormRepository.create(user)
+    await this.ormRepository.save(user)
+    return createUser
+  }
 
-  async findByEmail(email: string): Promise<User | null> {
-    return this.findOneBy({ email })
-  },
-})
+  async save(user: IUser): Promise<IUser> {
+    await this.ormRepository.save(user)
+    return user
+  }
+
+  async findByName(name: string): Promise<IUser | null> {
+    const user = await this.ormRepository.findOneBy({ name })
+    return user
+  }
+
+  async findById(id: number): Promise<IUser | null> {
+    const user = await this.ormRepository.findOneBy({ id })
+    return user
+  }
+
+  async findByEmail(email: string): Promise<IUser | null> {
+    const user = await this.ormRepository.findOneBy({ email })
+    return user
+  }
+
+  async find(): Promise<IUser[]> {
+    const users = await this.ormRepository.find()
+    return users
+  }
+}

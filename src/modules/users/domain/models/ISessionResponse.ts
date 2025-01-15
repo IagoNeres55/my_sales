@@ -1,7 +1,7 @@
-import { User } from '@modules/users/infra/database/entities/User'
+import { IUser } from './IUser'
 
 export interface ISessionResponse {
-  user: User
+  user: IUser
   access_token: string
   token_type: string
 }

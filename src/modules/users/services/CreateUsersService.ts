@@ -1,15 +1,21 @@
 import AppError from '@shared/erros/AppError'
-import { usersRepositories } from '../infra/database/repositories/UserRepositories'
-import { User } from '../infra/database/entities/User'
 import { hash } from 'bcrypt'
 import { instanceToInstance } from 'class-transformer'
 import { ICreateUser } from '../domain/models/ICreateUser'
+import { inject, injectable } from 'tsyringe'
+import IUsersRepository from '../domain/repositories/IUsersRepositories'
+import { IUser } from '../domain/models/IUser'
 
-
-
+@injectable()
 export default class CreateUserService {
-  async execute({ name, email, password }: ICreateUser): Promise<User> {
-    const emailExists = await usersRepositories.findByEmail(email)
+  constructor(
+    // @ts-ignore
+    @inject('UserRepository')
+    private readonly usersRepositories: IUsersRepository,
+  ) {}
+
+  async execute({ name, email, password }: ICreateUser): Promise<IUser> {
+    const emailExists = await this.usersRepositories.findByEmail(email)
 
     if (emailExists) {
       throw new AppError('Email já está em uso', 409)
@@ -17,15 +23,13 @@ export default class CreateUserService {
 
     const hashedPassword = await hash(password, 10)
 
-    const user = usersRepositories.create({
+    const user = await this.usersRepositories.create({
       name,
       email,
       password: hashedPassword,
     })
 
     // remove a senha do get
-    await usersRepositories.save(user)
-
     return instanceToInstance(user)
   }
 }

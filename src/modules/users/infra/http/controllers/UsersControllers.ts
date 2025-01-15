@@ -2,11 +2,12 @@ import CreateUserService from '@modules/users/services/CreateUsersService'
 import ListUsersService from '@modules/users/services/ListUsersService'
 import SessionUserService from '@modules/users/services/SessionUserService'
 import { Request, Response } from 'express'
+import { container } from 'tsyringe'
 
 
-export default class UsersControlleres {
+export default class UsersControllers {
   public async index(_: Request, response: Response): Promise<void> {
-    const listUsersService = new ListUsersService()
+    const listUsersService = container.resolve(ListUsersService)
     const users = await listUsersService.execute()
     response.json(users)
   }
@@ -15,7 +16,7 @@ export default class UsersControlleres {
 
     const { name, email, password } = request.body
 
-    const createUserService = new CreateUserService()
+    const createUserService =  container.resolve(CreateUserService)
 
     const user = await createUserService.execute({
       name,
@@ -28,7 +29,7 @@ export default class UsersControlleres {
 
   public async login(request: Request, response: Response): Promise<void> {
     const { email, password } = request.body
-    const sessionUserService = new SessionUserService()
+    const sessionUserService = container.resolve(SessionUserService)
     const userAuth = await sessionUserService.execute({email, password})
 
     response.json({

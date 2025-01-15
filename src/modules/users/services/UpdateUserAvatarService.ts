@@ -1,15 +1,27 @@
 import AppError from '@shared/erros/AppError'
 import { User } from '../infra/database/entities/User'
-import { usersRepositories } from '../infra/database/repositories/UserRepositories'
 import path from 'path'
 import uploadConfig from '@config/upload'
 import fs from 'fs'
 import { instanceToInstance } from 'class-transformer'
 import { IUpdateUserAvatar } from '../domain/models/IUpdateUserAvatar'
+import IUsersRepository from '../domain/repositories/IUsersRepositories'
+import { inject, injectable } from 'tsyringe'
+import { IUser } from '../domain/models/IUser'
 
+
+@injectable()
 export default class UpdateUserAvatarService {
-  async execute({ userId, avatarFileName }: IUpdateUserAvatar): Promise<User> {
-    const user = await usersRepositories.findById(Number(userId))
+
+  constructor(
+    //@ts-ignore
+    @inject('UserRepository')
+    private readonly usersRepositories: IUsersRepository,
+
+
+  ) {}
+  async execute({ userId, avatarFileName }: IUpdateUserAvatar): Promise<IUser> {
+    const user = await this.usersRepositories.findById(Number(userId))
 
     if (!user) {
       throw new AppError('user not found', 404)
@@ -29,7 +41,7 @@ export default class UpdateUserAvatarService {
     // adicionando o novo avatar
     user.avatar = avatarFileName
 
-    await usersRepositories.save(user)
+    await this.usersRepositories.save(user)
     return instanceToInstance(user)
   }
 }

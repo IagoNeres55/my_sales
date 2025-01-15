@@ -1,17 +1,29 @@
 import AppError from '@shared/erros/AppError'
-import { usersRepositories } from '../infra/database/repositories/UserRepositories'
-import { UserTokensRepositories } from '../infra/database/repositories/UserTokensRepositories'
 import { sendEmail } from '@config/email'
+import { inject, injectable } from 'tsyringe'
+import IUsersRepository from '../domain/repositories/IUsersRepositories'
+import IUserTokensRepository from '../domain/repositories/IUserTokensRepositories'
 
+@injectable()
 export default class SendForgotPasswordEmailService {
+  constructor(
+    //@ts-ignore
+    @inject('UserRepository')
+    private readonly usersRepositories: IUsersRepository,
+
+    //@ts-ignore
+    @inject('UserTokenRepository')
+    private readonly UserTokensRepositories: IUserTokensRepository,
+  ) {}
+
   async execute({ email }: { email: string }): Promise<void> {
-    const user = await usersRepositories.findByEmail(email)
+    const user = await this.usersRepositories.findByEmail(email)
 
     if (!user) {
       throw new AppError('Usuário não existe', 404)
     }
 
-    const token = await UserTokensRepositories.generate(user.id)
+    const token = await this.UserTokensRepositories.generate(user.id)
 
     sendEmail({
       to: user.email,
