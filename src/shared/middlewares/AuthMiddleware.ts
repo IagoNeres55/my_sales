@@ -2,7 +2,6 @@ import { Secret, verify } from 'jsonwebtoken'
 import 'dotenv/config'
 
 import { NextFunction, Request, Response } from 'express'
-import { usersRepositories } from '@modules/users/infra/database/repositories/UserRepositories'
 import AppError from '@shared/erros/AppError'
 
 interface ITokenPayload {

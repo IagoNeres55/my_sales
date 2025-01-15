@@ -9,7 +9,7 @@ export interface Pagination {
 // criando um contrato de dominio
 export default interface ICustomersRepository {
   create(data: ICreateCustomer): Promise<ICustomer>
-  save(customer: ICreateCustomer): Promise<ICustomer>
+  save(customer: ICustomer): Promise<ICustomer>
   remove(customer: ICustomer): Promise<void>
   findByEmail(email: string): Promise<ICustomer | null>
   findById(id: number): Promise<ICustomer | null>
