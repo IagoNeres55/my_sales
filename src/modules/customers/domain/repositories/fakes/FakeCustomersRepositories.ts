@@ -1,13 +1,12 @@
-import { name } from './../../../../../../node_modules/ci-info/index.d'
 import { Customers } from '@modules/customers/infra/database/entities/Customers'
 import ICustomersRepository, { Pagination } from '../ICustomersRepositories'
 import { ICustomer } from '../../models/ICustomer'
-import { error } from 'console'
+import { ICreateCustomer } from '../../models/ICreateCustomer'
 
 export default class FakeCustomersRepositories implements ICustomersRepository {
   private customers: Customers[] = []
 
-  public async create(customer: ICustomer): Promise<ICustomer> {
+  public async create(customer: ICreateCustomer): Promise<ICustomer> {
     const customers = new Customers()
 
     customers.id = this.customers.length + 1

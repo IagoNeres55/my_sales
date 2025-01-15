@@ -6,7 +6,7 @@ import { inject, injectable } from 'tsyringe'
 @injectable()
 export class ListCustomersService {
   constructor(
-    // @ts-ignore
+
     @inject('CustomerRepository')
     private readonly customersRepositories: ICustomersRepository,
   ) {}

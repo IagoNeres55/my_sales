@@ -7,7 +7,7 @@ import { inject, injectable } from 'tsyringe'
 export default class DeleteProductService {
 
   constructor(
-    // @ts-ignore
+
     @inject('ProductRepository')
     private readonly productsRepositories: IProductsRepository,
   ) {}

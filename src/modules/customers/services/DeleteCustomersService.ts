@@ -6,7 +6,7 @@ import { inject, injectable } from 'tsyringe'
 @injectable()
 export default class DeleteCustomersService {
   constructor(
-    // @ts-ignore
+
     @inject('CustomerRepository') private readonly customersRepositories: ICustomersRepository,
   ) {}
   public async execute({ id }: IDeleteCustomer): Promise<void> {

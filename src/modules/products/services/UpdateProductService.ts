@@ -9,7 +9,7 @@ import { inject, injectable } from 'tsyringe';
 export default class UpdateProductService {
 
   constructor(
-    // @ts-ignore
+
     @inject('ProductRepository')
     private readonly productsRepositories: IProductsRepository,
   ) {}

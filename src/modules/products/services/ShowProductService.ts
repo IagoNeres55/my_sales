@@ -6,7 +6,7 @@ import IProductsRepository from '../domain/repositories/IProductsRepositories'
 @injectable()
 export default class ShowProductService {
   constructor(
-    // @ts-ignore
+
     @inject('ProductRepository')
     private readonly productsRepositories: IProductsRepository,
   ) {}

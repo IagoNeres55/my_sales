@@ -6,7 +6,7 @@ import IOrdersRepository from '../domain/repositories/IOrdersRepositories'
 @injectable()
 export class ShowOrderService {
   constructor(
-    // @ts-ignore
+
     @inject('OrdersRepository')
     private readonly ordersRepositories: IOrdersRepository,
   ) {}

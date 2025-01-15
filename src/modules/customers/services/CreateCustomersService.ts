@@ -11,7 +11,6 @@ export class CreateCustomersService {
   // fazemos a validação para ele conhecer somente a interface e a partir dela acessar o repositorio
   constructor(
     // referenciando o container criado em shared
-    // @ts-ignore
     @inject('CustomerRepository')
     private readonly customersRepositories: ICustomersRepository,
   ) {}

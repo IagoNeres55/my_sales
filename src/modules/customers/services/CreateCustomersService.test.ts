@@ -12,13 +12,14 @@ describe('CreateCustomerService', () => {
       name: 'iago neres rufino',
       email: 'teste123@gmail.com.br'
     })
-
     expect(customer).toHaveProperty('id')
     expect(customer.email).toBe('teste123@gmail.com.br')
   })
 
-  test('shoul be 10', () => {
-    expect(5 + 5).toBe(10)
-  })
+  //   const
+
+  // test('shoul be 10', () => {
+  //   expect(5 + 5).toBe(10)
+  // })
 })
 

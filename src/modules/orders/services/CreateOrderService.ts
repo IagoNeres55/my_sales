@@ -8,7 +8,7 @@ import { productRepository } from '@modules/products/infra/database/repositories
 @injectable()
 export class CreateOrderService {
   constructor (
-    // @ts-ignore
+
     @inject('OrdersRepository') private readonly ordersRepositories: IOrdersRepository,
   ){}
   public async execute({ customer_id, products }: ICreateOrder): Promise<Order> {
