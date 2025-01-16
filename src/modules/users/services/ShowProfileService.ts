@@ -8,7 +8,6 @@ import { IUser } from '../domain/models/IUser'
 export default class ShowProfileService {
 
   constructor(
-    //@ts-ignore
     @inject('UserRepository')
     private readonly usersRepositories: IUsersRepository,
 

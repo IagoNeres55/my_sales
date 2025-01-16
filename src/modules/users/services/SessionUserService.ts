@@ -13,7 +13,6 @@ const JWT_SECRET = process.env.SECRET_KEY_JWT as Secret
 @injectable()
 export default class SessionUserService {
   constructor(
-    //@ts-ignore
     @inject('UserRepository')
     private readonly usersRepositories: IUsersRepository,
   ) {}

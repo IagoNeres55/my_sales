@@ -22,5 +22,10 @@ describe('CreateCustomerService', () => {
       await expect(createCustomer.execute(customerMock)).rejects.toBeInstanceOf(
         AppError,
       )
+
+      await expect(createCustomer.execute(customerMock)).rejects.toHaveProperty(
+        'statusCode',
+        409,
+      )
     })
 })

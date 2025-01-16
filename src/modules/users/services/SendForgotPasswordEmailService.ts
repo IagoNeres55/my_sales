@@ -7,11 +7,9 @@ import IUserTokensRepository from '../domain/repositories/IUserTokensRepositorie
 @injectable()
 export default class SendForgotPasswordEmailService {
   constructor(
-    //@ts-ignore
     @inject('UserRepository')
     private readonly usersRepositories: IUsersRepository,
 
-    //@ts-ignore
     @inject('UserTokenRepository')
     private readonly UserTokensRepositories: IUserTokensRepository,
   ) {}

@@ -46,7 +46,20 @@ export default class FakeCustomersRepositories implements ICustomersRepository {
     const customer = this.customers.find(customers => customers.id === id)
     return customer as ICustomer | null
   }
-  findAndCount(pagination: Pagination): Promise<[ICustomer[], number]> {
-    throw new Error('method not implemented')
+  // async findAndCount({ take, skip }: Pagination): Promise<[Customers[], number]> {
+  //   const total = this.customers.length
+  //   const paginatedData = this.customers.slice(skip, skip + take)
+  //   return [paginatedData, total]
+  // }
+  async findAndCount({ take, skip }: Pagination): Promise<[Customers[], number]> {
+    const total = this.customers.length
+    // Verifica se não há clientes cadastrados
+    if (total === 0) {
+      return [[], 0]
+    }
+    // Garante que os valores de `skip` e `take` sejam válidos
+    const paginatedData = this.customers.slice(skip, skip + take)
+
+    return [paginatedData, total]
   }
 }

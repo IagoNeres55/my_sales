@@ -30,7 +30,6 @@ export default class FakeUserRepositories implements IUsersRepository {
     } else {
       this.users.push(userEntity)
     }
-
     return userEntity
   }
 

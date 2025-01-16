@@ -11,7 +11,6 @@ import { IUser } from '../domain/models/IUser'
 export default class UpdateProfileService {
 
   constructor(
-    //@ts-ignore
     @inject('UserRepository')
     private readonly usersRepositories: IUsersRepository,
   ) {}
