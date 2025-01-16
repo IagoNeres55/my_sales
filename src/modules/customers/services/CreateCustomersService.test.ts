@@ -1,4 +1,5 @@
 import AppError from '@shared/erros/AppError'
+import { customerMock } from '../domain/factories/customerFactory'
 import FakeCustomersRepositories from '../domain/repositories/fakes/FakeCustomersRepositories'
 import { CreateCustomersService } from './CreateCustomersService'
 
@@ -8,12 +9,9 @@ describe('CreateCustomerService', () => {
     // criar uma injeçao para o meu fake repository
     const createCustomer = new CreateCustomersService(fakeCustomersRepositories)
 
-    const customer = await createCustomer.execute({
-      name: 'iago neres rufino',
-      email: 'teste123@gmail.com.br',
-    })
+    const customer = await createCustomer.execute(customerMock)
     expect(customer).toHaveProperty('id')
-    expect(customer.email).toBe('teste123@gmail.com.br')
+    expect(customer.email).toBe('iago.neres@gmail.com')
   }),
     test('should not be able to create a new customer with email that is already in use', async () => {
       const fakeCustomersRepositories = new FakeCustomersRepositories()
@@ -21,16 +19,10 @@ describe('CreateCustomerService', () => {
         fakeCustomersRepositories,
       )
 
-      await createCustomer.execute({
-        name: 'iago neres rufino',
-        email: 'teste123@gmail.com.br',
-      })
+      await createCustomer.execute(customerMock)
 
       await expect(
-        createCustomer.execute({
-          name: 'iago neres rufino',
-          email: 'teste123@gmail.com.br',
-        }),
+        createCustomer.execute(customerMock),
       ).rejects.toBeInstanceOf(AppError)
     })
 })
