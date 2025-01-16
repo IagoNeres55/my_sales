@@ -32,7 +32,7 @@ export const customersListMock = {
     total: 3,
     current_page: 1,
     total_pages: 1,
-    next_page: 2,
+    next_page: null,
     prev_page: null,
   },
 }
