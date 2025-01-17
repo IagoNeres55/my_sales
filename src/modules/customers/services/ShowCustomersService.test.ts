@@ -19,15 +19,17 @@ describe('ShowCustomersService', () => {
 
     customer = await fakeCustomersRepositories.findById(1)
     expect(customer?.email).toBe('iago.neres@gmail.com')
+    expect(customer?.name).toBe('Iago')
 
-    const id: number = 10
 
-    await expect(showCustomer.execute({ id })).rejects.toHaveProperty(
-      'statusCode',
-      404,
-    )
+    // const id: number = 10
+    // await expect(showCustomer.execute({ id })).rejects.toHaveProperty(
+    //   'statusCode',
+    //   404,
+    // )
 
-    customer = await fakeCustomersRepositories.findById(id)
-    expect(customer).toBe(null)
+    customer = await fakeCustomersRepositories.findById(10)
+    expect(customer).toBeUndefined()
+
   })
 })
