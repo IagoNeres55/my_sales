@@ -1,7 +1,33 @@
+import {
+  customerMock,
+  customersListMock,
+} from '../domain/factories/customerFactory'
+import FakeCustomersRepositories from '../domain/repositories/fakes/FakeCustomersRepositories'
+import { ShowCustomersService } from './ShowCustomersService'
 
+let fakeCustomersRepositories: FakeCustomersRepositories
+let showCustomer: ShowCustomersService
+let customer
+describe('ShowCustomersService', () => {
+  beforeEach(() => {
+    fakeCustomersRepositories = new FakeCustomersRepositories()
+    showCustomer = new ShowCustomersService(fakeCustomersRepositories)
+  })
 
+  test('shuld be able to show all customers', async () => {
+    await fakeCustomersRepositories.create(customerMock)
 
+    customer = await fakeCustomersRepositories.findById(1)
+    expect(customer?.email).toBe('iago.neres@gmail.com')
 
-describe('ShowCustomersService', ()=>{
+    const id: number = 10
 
+    await expect(showCustomer.execute({ id })).rejects.toHaveProperty(
+      'statusCode',
+      404,
+    )
+
+    customer = await fakeCustomersRepositories.findById(id)
+    expect(customer).toBe(null)
+  })
 })
