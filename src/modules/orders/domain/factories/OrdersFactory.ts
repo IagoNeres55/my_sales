@@ -31,12 +31,13 @@ export const customerOrderMock = [
   },
 ]
 
-export const order_products_fake: IOrdersProductsFake = {
-  id: 1,
-  price: 50,
-  quantity: 150,
-  created_at: new Date(),
-  updated_at: new Date(),
-  order_id: '1',
-  product_id: '1',
-}
+
+const customersMock = [
+  { id: 1, name: 'Customer 1' },
+  { id: 2, name: 'Customer 2' },
+];
+
+const productsMock = [
+  { id: 1, name: 'Product 1', quantity: 10, price: 100 },
+  { id: 2, name: 'Product 2', quantity: 5, price: 200 },
+];
