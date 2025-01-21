@@ -1,34 +1,34 @@
-export let productsMocks = [
+import 'reflect-metadata'
+import { Product } from '@modules/products/infra/database/entities/Product';
+import { Customers } from '@modules/customers/infra/database/entities/Customers';
+
+export const productsMocks: Product[] = [
   {
     id: '1',
-    name: 'MAÇA',
-    price: 1.5,
-    quantity: 25,
-    created_at: new Date('2023-01-03T00:00:00Z'),
-    updated_at: new Date('2023-01-03T00:00:00Z'),
+    name: 'Product 1',
+    price: 100,
+    quantity: 10,
+    created_at: new Date(),
+    updated_at: new Date(),
+    order_products: [], // Array vazio, já que este mock não está relacionado a pedidos específicos
   },
   {
     id: '2',
-    name: 'BANANA',
-    price: 4,
-    quantity: 25,
-    created_at: new Date('2023-01-03T00:00:00Z'),
-    updated_at: new Date('2023-01-03T00:00:00Z'),
+    name: 'Product 2',
+    price: 200,
+    quantity: 5,
+    created_at: new Date(),
+    updated_at: new Date(),
+    order_products: [], // Mesmo tratamento para garantir o alinhamento ao tipo Product
   },
+];
+
+export const customerOrderMock: Customers[] = [
   {
-    id: '3',
-    name: 'MELÃO',
-    price: 15,
-    quantity: 25,
-    created_at: new Date('2023-01-03T00:00:00Z'),
-    updated_at: new Date('2023-01-03T00:00:00Z'),
+    id: 1,
+    name: 'Customer 1',
+    email: 'customer1@example.com',
+    created_at: new Date(),
+    updated_at: new Date(),
   },
-  {
-    id: '4',
-    name: 'CAJU',
-    price: 16,
-    quantity: 25,
-    created_at: new Date('2023-01-03T00:00:00Z'),
-    updated_at: new Date('2023-01-03T00:00:00Z'),
-  },
-]
+];

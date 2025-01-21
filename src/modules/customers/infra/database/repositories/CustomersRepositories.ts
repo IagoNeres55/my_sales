@@ -1,9 +1,9 @@
 import { AppDataSource } from '@shared/infra/typeorm/data-source'
-import { Customers } from '../entities/Customers'
 import ICustomersRepository, { Pagination } from '@modules/customers/domain/repositories/ICustomersRepositories'
 import { Repository } from 'typeorm'
 import { ICustomer } from '@modules/customers/domain/models/ICustomer'
 import { ICreateCustomer } from '@modules/customers/domain/models/ICreateCustomer'
+import { Customers } from '../entities/Customers'
 // import { Like } from 'typeorm'
 
 export class customersRepository implements ICustomersRepository {
