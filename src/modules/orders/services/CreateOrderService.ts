@@ -23,11 +23,11 @@ export class CreateOrderService {
     const product = container.resolve(productRepository)
     const existsProducts = await product.findAllByIds(products)
 
+    // avisar o cliente que os produtos enviados não existe
     if (!existsProducts.length) {
       throw new AppError('Não existe produtos com o id informado')
     }
 
-    // avisar o cliente que os produtos enviados não existe
     const existsProductsIds = products.map(product => product.id)
 
     const checkInexistentProducts = products.filter(
