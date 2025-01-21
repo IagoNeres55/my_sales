@@ -1,20 +1,16 @@
-import {
-  customerMock,
-  customersListMock,
-} from '../domain/factories/customerFactory'
+import { customerMock } from '../domain/factories/customerFactory'
 import FakeCustomersRepositories from '../domain/repositories/fakes/FakeCustomersRepositories'
 import { ShowCustomersService } from './ShowCustomersService'
 
 let fakeCustomersRepositories: FakeCustomersRepositories
 let showCustomer: ShowCustomersService
-let customer
 describe('ShowCustomersService', () => {
   beforeEach(() => {
     fakeCustomersRepositories = new FakeCustomersRepositories()
     showCustomer = new ShowCustomersService(fakeCustomersRepositories)
   })
 
-  test('shuld be able to show all customers', async () => {
+  test('Shuold be able to show all customers', async () => {
     await fakeCustomersRepositories.create(customerMock)
 
     // customer = await fakeCustomersRepositories.findById(1)

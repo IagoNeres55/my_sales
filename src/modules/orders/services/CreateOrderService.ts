@@ -5,10 +5,11 @@ import { container, inject, injectable } from 'tsyringe'
 import { customersRepository } from '@modules/customers/infra/database/repositories/CustomersRepositories'
 import IOrdersRepository from '../domain/repositories/IOrdersRepositories'
 import { productRepository } from '@modules/products/infra/database/repositories/ProductsRepositories'
+import 'reflect-metadata'
+
 @injectable()
 export class CreateOrderService {
   constructor (
-
     @inject('OrdersRepository') private readonly ordersRepositories: IOrdersRepository,
   ){}
   public async execute({ customer_id, products }: ICreateOrder): Promise<Order> {

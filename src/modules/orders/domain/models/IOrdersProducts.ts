@@ -11,3 +11,14 @@ export interface IOrdersProducts {
   product: Product
   product_id: string
 }
+
+export interface IOrdersProductsFake {
+  id: number
+  price: number
+  quantity: number
+  created_at: Date
+  updated_at: Date
+  order_id: string
+  product_id: string
+}
+
