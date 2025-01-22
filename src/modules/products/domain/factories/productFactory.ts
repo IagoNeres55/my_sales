@@ -5,3 +5,4 @@ export const createProductMock: ICreateProduct = {
   price: 150,
   quantity: 85,
 }
+
