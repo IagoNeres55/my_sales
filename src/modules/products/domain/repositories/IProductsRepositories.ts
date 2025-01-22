@@ -2,7 +2,7 @@ import { Product } from '@modules/products/infra/database/entities/Product'
 import { IFindProducts } from '../models/IFindProducts'
 import { IProduct } from '../models/IProduct'
 import { ICreateProduct } from '../models/ICreateProduct'
-import { IUpdateStockProduct } from '../models/IUpdateStockProduct'
+import { IUpdateProduct } from '../models/IUpdateProduct'
 
 // cria um contrato com o repositorio e controllers de products
 export default interface IProductsRepository {
@@ -13,5 +13,5 @@ export default interface IProductsRepository {
   findById(id: string): Promise<Product | null>
   findAllByIds(products: IFindProducts[]): Promise<Product[]>
   find(): Promise<Product[]>
-  update(product: IUpdateStockProduct): Promise<Product>
+  update(product: IUpdateProduct): Promise<Product>
 }
