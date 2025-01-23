@@ -12,7 +12,7 @@ let resetPasswordUser: ResetPasswordService
 jest.mock('bcrypt', () => ({
   hash: jest.fn(),
 }))
-describe('CreateUsersService', () => {
+describe('ResetPasswordService', () => {
   beforeEach(() => {
     fakeUserTokensRepositories = new FakeUserTokenRepositories()
     fakeUserRepositories = new FakeUserRepositories()
