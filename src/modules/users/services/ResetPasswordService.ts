@@ -17,13 +17,11 @@ export default class ResetPasswordService {
 
   async execute({ token, password }: IResetPassword): Promise<void> {
     const userToken = await this.UserTokensRepositories.findByToken(token)
-
     if (!userToken) {
       throw new AppError('token não existe', 404)
     }
 
     const user = await this.usersRepositories.findById(userToken.user_id)
-
     if (!user) {
       throw new AppError('Usuário não existe', 404)
     }

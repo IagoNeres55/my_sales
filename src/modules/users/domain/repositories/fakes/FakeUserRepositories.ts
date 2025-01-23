@@ -49,6 +49,7 @@ export default class FakeUserRepositories implements IUsersRepository {
   }
 
   public async find(): Promise<IUser[]> {
-    throw new Error('method not implemented')
+    const users = this.users
+    return users
   }
 }
