@@ -1,14 +1,13 @@
 import AppError from '@shared/erros/AppError'
-import { User } from '../infra/database/entities/User'
 import path from 'path'
 import uploadConfig from '@config/upload'
 import fs from 'fs'
+
 import { instanceToInstance } from 'class-transformer'
 import { IUpdateUserAvatar } from '../domain/models/IUpdateUserAvatar'
 import IUsersRepository from '../domain/repositories/IUsersRepositories'
 import { inject, injectable } from 'tsyringe'
 import { IUser } from '../domain/models/IUser'
-
 
 @injectable()
 export default class UpdateUserAvatarService {

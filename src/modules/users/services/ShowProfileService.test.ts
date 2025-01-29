@@ -19,12 +19,12 @@ describe('ShowProfileService', () => {
 
     const showUser = await showProfileService.execute({ user_id: user.id })
     expect(showUser.name).toBe('iago')
-    // )
+
   })
   test('Should be return error', async () => {
     await expect(
       showProfileService.execute({ user_id: 2 }),
     ).rejects.toBeInstanceOf(AppError)
-    // )
+
   })
 })
