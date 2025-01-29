@@ -1,7 +1,4 @@
 import FakeUserRepositories from "../domain/repositories/fakes/FakeUserRepositories"
-import FakeUserTokenRepositories from "../domain/repositories/fakes/FakeUserTokenRepositories"
-import SendForgotPasswordEmailService from "./SendForgotPasswordEmailService"
-
 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
