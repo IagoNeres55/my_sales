@@ -7,7 +7,9 @@ let fakeUserRepositories: FakeUserRepositories
 let sendForgotPassword: SendForgotPasswordEmailService
 import AppError from '@shared/erros/AppError'
 
-
+jest.mock('@config/email', () => ({
+  sendEmail: jest.fn(),
+}))
 
 describe('SendForgotPasswordEmailService.test', () => {
   beforeEach(() => {
@@ -24,28 +26,33 @@ describe('SendForgotPasswordEmailService.test', () => {
       email: 'user@example.com',
       password: '123456',
       name: 'Test User',
-    })
+    });
 
-    await sendForgotPassword.execute({ email: 'user@example.com' })
+    // Mock the token generation
+    const mockToken = 'mocked-token-123';
+    jest.spyOn(fakeUserTokensRepositories, 'generate').mockResolvedValueOnce({
+      id: 1,
+      token: mockToken,
+      user_id: user.id,
+      created_at: new Date(),
+      updated_at: new Date(),
+    });
 
-    const token = await fakeUserTokensRepositories.generate(user.id)
-
-    // expect(
-    //   await fakeUserRepositories.findByEmail('testNotEmail@gmail.com'),
-    // ).rejects.toHaveProperty('statusCode', 404)
+    await sendForgotPassword.execute({ email: 'user@example.com' });
 
     expect(sendEmail).toHaveBeenCalledWith({
       to: user.email,
       subject: 'Redefinir Senha',
-      body: token.token,
+      body: expect.stringContaining(mockToken),
     });
-  })
+  });
 
   test('should not send an email if the user does not exist', async () => {
     await expect(
       sendForgotPassword.execute({ email: 'nonexistent@example.com' }),
     ).rejects.toBeInstanceOf(AppError)
 
+    // Verify that sendEmail was not called
     expect(sendEmail).not.toHaveBeenCalled()
   })
 })
