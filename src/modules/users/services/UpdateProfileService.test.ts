@@ -1,12 +1,15 @@
 import AppError from '@shared/erros/AppError'
-import bcrypt from 'bcrypt'
+import bcrypt, { compare } from 'bcrypt'
 import FakeUserRepositories from '../domain/repositories/fakes/FakeUserRepositories'
 import UpdateProfileService from './UpdateProfileService'
 
 let fakeUserRepositories: FakeUserRepositories
 let updateProfileService: UpdateProfileService
 
-jest.mock('bcrypt')
+jest.mock('bcrypt', () => ({
+  hash: jest.fn(),
+  compare: jest.fn(),
+}))
 
 describe('UpdateProfileService', () => {
   beforeEach(() => {
@@ -38,7 +41,7 @@ describe('UpdateProfileService', () => {
       old_password: '',
     }
 
-    const user = await fakeUserRepositories.create({
+    await fakeUserRepositories.create({
       name: 'iago',
       email: 'iago@123.com',
       password: '1234',
@@ -56,38 +59,57 @@ describe('UpdateProfileService', () => {
     await expect(
       updateProfileService.execute(userMock3),
     ).rejects.toHaveProperty('message', 'informe a senha anterior')
-  })
 
-  test('should update the password if old_password is correct', async () => {
+    ;(compare as jest.Mock).mockImplementation(
+      async (old_password, password) => {
+        if (old_password === password) {
+          return true
+        } else {
+          throw new AppError('Password informado não condiz com o anterior')
+        }
+      },
+    )
 
-    const user = await fakeUserRepositories.create({
-      name: 'iago',
+    const userMock4 = {
+      user_id: 1,
+      name: 'teste',
       email: 'iago@123.com',
-      password: '1234',
-    })
-
-    ;(bcrypt.compare as jest.Mock).mockResolvedValue(true)
-
-    // Mock do bcrypt.hash para retornar uma nova senha hasheada
-    ;(bcrypt.hash as jest.Mock).mockResolvedValue('hashedNewPassword')
-
-    const old_password = 'correctOldPassword'
-    const password = 'newPassword'
-
-    if (password && old_password) {
-      const checkOldPassword = await bcrypt.compare(old_password, user.password)
-
-      if (!checkOldPassword) {
-        throw new AppError('Password informado não condiz com o anterior')
-      }
-
-      user.password = await bcrypt.hash(password, 10)
+      password: '12345',
+      old_password: '1234',
+    }
+    const userMock5 = {
+      user_id: 1,
+      name: 'teste',
+      email: 'iago@123.com',
+      password: '12345',
+      old_password: '55555',
     }
 
-    // Verifica se a senha foi atualizada corretamente
-    expect(user.password).toBe('hashedNewPassword')
+
+
+
+    await expect(updateProfileService.execute(userMock4)).resolves.toHaveProperty('id', 1)
+
 
   })
 
+  // test('should be able erros', async () => {
 
+
+  //   // await expect(
+  //   //   updateProfileService.execute(userMock2),
+  //   // ).rejects.toBeInstanceOf(AppError)
+
+
+  //   // await expect(compare('teste','teste')).
+
+  //   // const teste = await compare('teste', 'teste')
+  //   // console.log('teste => ', teste)
+  //   // expect(teste).toEqual(true)
+  //   // const testes = await compare('tesste', 'teste')
+
+  //   // expect(testes).toEqual(' Password informado não condiz com o anterior')
+
+  //   // expect(teste).rejects.toBeInstanceOf(AppError)
+  // })
 })
