@@ -2,16 +2,16 @@ import FakeUserRepositories from '../domain/repositories/fakes/FakeUserRepositor
 import FakeUserTokenRepositories from '../domain/repositories/fakes/FakeUserTokenRepositories'
 import SendForgotPasswordEmailService from './SendForgotPasswordEmailService'
 import { sendEmail } from '@config/email'
+import AppError from '@shared/erros/AppError'
 let fakeUserTokensRepositories: FakeUserTokenRepositories
 let fakeUserRepositories: FakeUserRepositories
 let sendForgotPassword: SendForgotPasswordEmailService
-import AppError from '@shared/erros/AppError'
 
 jest.mock('@config/email', () => ({
   sendEmail: jest.fn(),
 }))
 
-describe('SendForgotPasswordEmailService.test', () => {
+describe('SendForgotPasswordEmailService', () => {
   beforeEach(() => {
     fakeUserTokensRepositories = new FakeUserTokenRepositories()
     fakeUserRepositories = new FakeUserRepositories()
