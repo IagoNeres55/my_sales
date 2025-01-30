@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { customerOrderMock, productsOrderMock } from './../domain/factories/OrdersFactory'
 import FakeOrdersRepositories from '../domain/repositories/fakes/FakeOrdersRepositories'
 import { CreateOrderService } from './CreateOrderService'

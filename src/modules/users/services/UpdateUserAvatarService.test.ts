@@ -1,10 +1,8 @@
-import uploadConfig from '@config/upload';
 import 'reflect-metadata';
 import UpdateUserAvatarService from '@modules/users/services/UpdateUserAvatarService';
 import AppError from '@shared/erros/AppError';
 import FakeUserRepositories from '../domain/repositories/fakes/FakeUserRepositories';
 import fs from 'fs';
-import path from 'path';
 
 
 let fakeUserRepositories: FakeUserRepositories
