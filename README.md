@@ -15,6 +15,7 @@ Postgress
 Clone o repositório e instale as dependências:
 
 git clone [https://github.com/seu-usuario/my_sales.git](https://github.com/IagoNeres55/my_sales.git)
+
 cd my_sales
 npm install ou yarn install
 
