@@ -10,6 +10,8 @@ TypeScript
 
 Postgress
 
+Redis
+
 📦 Instalação
 
 Clone o repositório e instale as dependências:
@@ -37,8 +39,6 @@ npm start
 Crie um arquivo .env na raiz do projeto e defina as variáveis necessárias, como exemplo:
 
 PORT=3000
-
-MONGO_URI=mongodb://localhost:27017/my_sales
 
 JWT_SECRET=sua_chave_secreta
 
