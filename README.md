@@ -53,6 +53,26 @@ Relação Banco de Dados
 
 
 
+Teste De integração Utilizando Apidog
+
+![image](https://github.com/user-attachments/assets/516c54a0-b27d-4bdb-8999-227d10ca02d0)
+
+Resultado:
+
+![image](https://github.com/user-attachments/assets/9068adc0-aa50-4f60-9bbb-c575f1ab0acb)
+
+
+Quase 100% da aplicação testada
+
+![image](https://github.com/user-attachments/assets/12a0807b-0dd1-44d2-8009-3d1fa2727350)
+
+
+
+
+
+
+
+
 
 
 
