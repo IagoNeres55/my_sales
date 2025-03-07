@@ -46,3 +46,13 @@ JWT_SECRET=sua_chave_secreta
 
 Este projeto está sob a licença MIT. Sinta-se à vontade para usá-lo e modificá-lo conforme necessário.
 
+
+Relação Banco de Dados
+
+![image](https://github.com/user-attachments/assets/c24510ca-2b97-478a-804e-f9399642465c)
+
+
+
+
+
+
