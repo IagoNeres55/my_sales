@@ -26,11 +26,6 @@ export default class AuthMiddleware {
 
     const [, token] = tokenHeaders.split(' ') as string[]
 
-    // if (!/^Bearer$/i.test(bearer)) {
-    //   response.status(401).send({ message: 'Token fora do formato Bearer' })
-    //   return
-    // }
-
     try {
       const decodedToken = verify(token, JWT_SECRET as Secret)
 

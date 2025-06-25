@@ -33,6 +33,7 @@ export default class SessionUserService {
       subject: String(user.id),
       expiresIn: '24h',
     })
+
     return {
       user: instanceToInstance(user),
       token_type: 'Bearer',
